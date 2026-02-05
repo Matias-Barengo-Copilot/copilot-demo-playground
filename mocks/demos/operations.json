@@ -5,6 +5,7 @@
     "title": "Supply chain forecasting",
     "description": "Demand and supply forecasts for beans and packaging.",
     "narrative": "Keep stock levels right so the café never runs out of the popular roasts.",
+    "url": "https://example.com/demo/operations/supply-forecast",
     "tags": ["Operations"]
   },
   {
@@ -13,6 +14,7 @@
     "title": "Shift scheduling",
     "description": "AI-assisted staff scheduling based on traffic and availability.",
     "narrative": "Balance coverage and fairness for baristas and shift leads.",
+    "url": "https://example.com/demo/operations/shift-scheduling",
     "tags": ["Operations"]
   }
 ]

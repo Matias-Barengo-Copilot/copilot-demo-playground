@@ -14,9 +14,8 @@ type LandingHeaderProps = {
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
-  { label: "Business Functions", href: "/demos/business-functions" },
-  { label: "AI Agents", href: "/demos/ai-agents" },
-  { label: "Industry", href: "/demos/industry" },
+  { label: "Business Functions", href: "/#business-functions" },
+  { label: "Digital Workforce", href: "/#digital-workforce" },
 ] as const;
 
 export function LandingHeader({

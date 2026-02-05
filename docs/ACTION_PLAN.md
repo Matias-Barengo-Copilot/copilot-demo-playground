@@ -20,7 +20,6 @@ Este documento traduce el Project Brief del PM en un plan ejecutable paso a paso
 | **Landing (hub)** | `/` | Todos los usuarios autenticados |
 | **Categoría 1: Business Functions** | `/demos/business-functions` (índice) y subrutas por función | Todos |
 | **Categoría 2: AI Agents** | `/demos/ai-agents` (índice) y subrutas por agente | Todos |
-| **Categoría 3: Industry use cases** | `/demos/industry` (índice, enlaces externos) | Todos |
 | **Admin** | `/admin` | Solo usuarios con rol admin (oculto en la navegación principal) |
 
 ---
@@ -46,7 +45,6 @@ Este documento traduce el Project Brief del PM en un plan ejecutable paso a paso
 - [x] Definir **tipos TypeScript** para:
   - **Categoría 1 (Business Functions):** id, title, description, slug, narrative (cómo se enmarca en Mountain View Coffee), optional tags (HR, Marketing, Support, etc.).
   - **Categoría 2 (AI Agents):** id, title, description, slug, agentName, narrative (persona café), type: `"simulation"`.
-  - **Categoría 3 (Industry):** id, title, description, slug, externalUrl, industry, customerStory (quién es el “cliente” de la cafetería), type: `"external"`.
 - [x] Rellenar el catálogo con **placeholders** (ej. 1 demo por categoría) para poder construir la navegación y las páginas sin depender de contenido final.
 
 **Salida:** `lib/demo-catalog.ts` (o equivalente) con tipos y datos mínimos; demos listadas por categoría.
@@ -59,10 +57,9 @@ Este documento traduce el Project Brief del PM en un plan ejecutable paso a paso
 - [x] Crear rutas **índice** por categoría:
   - [x] `app/demos/business-functions/page.tsx` — lista de demos de Business Functions.
   - [x] `app/demos/ai-agents/page.tsx` — lista de demos de AI Agents.
-  - [x] `app/demos/industry/page.tsx` — lista de demos Industry (enlaces externos).
 - [x] Cada página de índice debe **leer del catálogo** (config) y renderizar cards/enlaces; sin hardcodear lista de demos en el JSX.
 
-**Salida:** Navegación a `/demos/business-functions`, `/demos/ai-agents`, `/demos/industry` funcionando con contenido basado en config.
+**Salida:** Navegación a `/demos/business-functions` y `/demos/ai-agents` funcionando con contenido basado en config.
 
 ---
 
@@ -76,11 +73,10 @@ Este documento traduce el Project Brief del PM en un plan ejecutable paso a paso
   - **Tres bloques principales** (o cards) que correspondan a las **tres categorías**, con:
     - Título de la categoría.
     - Descripción breve (lenguaje business-first).
-    - CTA a la ruta índice de esa categoría (`/demos/business-functions`, `/demos/ai-agents`, `/demos/industry`).
+    - CTA a la ruta índice de esa categoría (`/demos/business-functions`, `/demos/ai-agents`).
   - **Diferenciación visual/claridad:** Indicar de forma explícita en cada bloque:
     - **Business Functions:** “Demos integradas e interactivas”.
     - **AI Agents:** “Simulaciones de agentes (no sistemas en vivo)”.
-    - **Industry:** “Enlaces a demos externas por industria”.
 - [x] Opcional: sección corta “Sobre Mountain View Coffee” (narrativa del negocio ficticio) y/o “Sobre este portal” (uso interno, reutilización de demos).
 
 **Salida:** Landing en `/` que sirve como hub con tres entradas claras a las categorías y copy alineado al brief.
@@ -90,7 +86,7 @@ Este documento traduce el Project Brief del PM en un plan ejecutable paso a paso
 #### Paso 1.2 — Navegación global (header) (técnico)
 
 - [x] **Actualizar** `LandingHeader` (o el componente de nav usado en `app/layout` / `app/demos/layout`):
-  - Enlaces principales: **Home** (`/`), **Business Functions** (`/demos/business-functions`), **AI Agents** (`/demos/ai-agents`), **Industry** (`/demos/industry`).
+  - Enlaces principales: **Home** (`/`), **Business Functions** (`/#business-functions`), **Digital Workforce** (`/#digital-workforce`).
   - Quitar o reemplazar enlaces que ya no existan (ej. Coffee, Tea, About como anclas) por las nuevas rutas.
 - [x] Mantener **Admin** solo en el menú del avatar para usuarios con rol admin; **no** mostrar “Admin” en la barra principal.
 - [x] Asegurar que el **mismo header** se use en `/`, `/demos/*` y, si aplica, en páginas hijas de cada categoría.
@@ -146,24 +142,7 @@ Este documento traduce el Project Brief del PM en un plan ejecutable paso a paso
 
 ---
 
-### Fase 4: Categoría 3 — Industry use cases
 
-#### Paso 4.1 — Página índice (técnico + no técnico)
-
-- [x] En `app/demos/industry/page.tsx`, listar entradas de tipo “industry” desde el catálogo.
-- [x] Cada entrada es un “cliente” de Mountain View Coffee: empresa/industria ficticia o real con **historia corta**: quién es, industria, cómo usan IA.
-- [x] Cada card debe tener:
-  - Título (ej. “Ohio Gratings”).
-  - Historia breve (storytelling ligero).
-  - **Enlace externo** a la demo existente (abrir en nueva pestaña).
-  - **Indicación visual** de que el usuario sale del portal (icono “external link”, texto “Abrir demo externa”, etc.).
-
-#### Paso 4.2 — Manejo de enlaces externos (técnico)
-
-- [x] Enlaces con `target="_blank"` y `rel="noopener noreferrer"`.
-- [x] Opcional: componente reutilizable `ExternalDemoLink` que unifique estilo y advertencia (“Vas a salir del portal”).
-
-**Salida:** Página Industry con storytelling ligero y enlaces externos claramente diferenciados.
 
 ---
 
@@ -204,7 +183,7 @@ Este documento traduce el Project Brief del PM en un plan ejecutable paso a paso
 
 1. **Fase 0** (config + rutas base) — fundamento para el resto.
 2. **Fase 1** (landing como hub + nav) — lo que ve el usuario al entrar.
-3. **Fases 2, 3, 4** — se pueden hacer en paralelo o en el orden 2 → 3 → 4; cada una con índice + página(s) individuales y placeholders donde haga falta.
+3. **Fases 2 y 3** — se pueden hacer en paralelo; cada una con índice + página(s) individuales y placeholders donde haga falta.
 4. **Fase 5** (admin) — verificación rápida.
 5. **Fase 6** (consistencia y docs) — al final o en paralelo con contenido.
 
@@ -214,7 +193,7 @@ Este documento traduce el Project Brief del PM en un plan ejecutable paso a paso
 
 - [x] Ventas/equipos pueden **encontrar** las demos desde el landing sin depender de conocimiento informal.
 - [x] **Misma demo** reutilizable en varias presentaciones (rutas estables, contenido desde config).
-- [x] **Narrativa consistente** (Mountain View Coffee) en las tres categorías.
+- [x] **Narrativa consistente** (Mountain View Coffee) en las categorías del portal.
 - [x] **Diferenciación clara** entre demos embebidas, simulaciones y enlaces externos.
 - [x] Admin **no** forma parte de la experiencia del usuario final del portal.
 
@@ -222,4 +201,4 @@ Este documento traduce el Project Brief del PM en un plan ejecutable paso a paso
 
 ## 6. Próximo paso concreto
 
-**Siguiente paso recomendado:** Ejecutar **Fase 0** (Paso 0.1 + 0.2 + 0.3): definir nombre en UI, crear `lib/demo-catalog.ts` con tipos y placeholders, y las rutas `app/demos/layout.tsx`, `app/demos/business-functions/page.tsx`, `app/demos/ai-agents/page.tsx`, `app/demos/industry/page.tsx`. Después, Fase 1 para convertir el landing actual en el hub con tres bloques y la nueva navegación.
+**Siguiente paso recomendado:** Ejecutar **Fase 0** (Paso 0.1 + 0.2 + 0.3): definir nombre en UI, crear `lib/demo-catalog.ts` con tipos y placeholders, y las rutas `app/demos/layout.tsx`, `app/demos/business-functions/page.tsx`, `app/demos/ai-agents/page.tsx`. Después, Fase 1 para convertir el landing actual en el hub y la nueva navegación.

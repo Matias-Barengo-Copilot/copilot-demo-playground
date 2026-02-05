@@ -8,12 +8,11 @@ Login-protected demo portal. All demos are contextualized in **Mountain View Cof
 
 | Route | Description |
 |-------|-------------|
-| `/` | Hub: hero + three category cards (Business Functions, AI Agents, Industry) |
+| `/` | Hub: hero + category sections (Business Functions, Digital Workforce) |
 | `/demos/business-functions` | Index of embedded, interactive demos (HR, Marketing, Support, etc.) |
 | `/demos/business-functions/[slug]` | Individual business-function demo page |
-| `/demos/ai-agents` | Index of AI agent simulations (coffee-themed personas) |
-| `/demos/ai-agents/[slug]` | Individual agent simulation page |
-| `/demos/industry` | Index of industry use cases; each card links to an **external** demo (opens in new tab) |
+| `/demos/ai-agents` | Index of AI agent simulations (Digital Workforce) |
+| `/demos/ai-agents/[slug]` | Individual agent chat page |
 | `/admin` | Admin area (avatar menu only; not in main nav) |
 
 ### Adding demos (config-driven)
@@ -22,7 +21,6 @@ Edit **`lib/demo-catalog.ts`**:
 
 - **Business Functions:** add an entry to `BUSINESS_FUNCTION_DEMOS` (id, slug, title, description, narrative, optional tags).
 - **AI Agents:** add to `AI_AGENT_DEMOS` (id, slug, title, description, agentName, narrative, type: `"simulation"`).
-- **Industry:** add to `INDUSTRY_DEMOS` (id, slug, title, description, externalUrl, industry, customerStory, type: `"external"`).
 
 Slugs are used in URLs (e.g. `/demos/business-functions/hr-hiring`). Keep slugs URL-safe (lowercase, hyphens).
 

@@ -37,48 +37,7 @@ export const AI_AGENT_DEMOS: AIAgentDemo[] = [
   },
 ];
 
-// —— Category 3: Industry use cases (external links, "customers" of the coffee shop) ——
-export type IndustryDemo = {
-  id: string;
-  slug: string;
-  title: string;
-  description: string;
-  /** External URL to the existing demo */
-  externalUrl: string;
-  industry: string;
-  /** Short story: who they are, how they use AI (customer of Mountain View Coffee) */
-  customerStory: string;
-  type: "external";
-};
-
-export const INDUSTRY_DEMOS: IndustryDemo[] = [
-  {
-    id: "ohio-gratings",
-    slug: "ohio-gratings",
-    title: "Ohio Gratings",
-    description: "Industry-specific AI demo: manufacturing and operations.",
-    externalUrl: "https://example.com/ohio-gratings-demo",
-    industry: "Manufacturing",
-    customerStory: "Ohio Gratings is a long-time customer of Mountain View Coffee. See how they use AI in their manufacturing workflows.",
-    type: "external",
-  },
-  {
-    id: "acme-retail",
-    slug: "acme-retail",
-    title: "Acme Retail",
-    description: "AI for retail inventory and customer experience.",
-    externalUrl: "https://example.com/acme-retail-demo",
-    industry: "Retail",
-    customerStory: "Acme Retail stops by for coffee every morning. Discover how they apply AI in their stores.",
-    type: "external",
-  },
-];
-
 // —— Helpers ——
 export function getAIAgentBySlug(slug: string): AIAgentDemo | undefined {
   return AI_AGENT_DEMOS.find((d) => d.slug === slug);
-}
-
-export function getIndustryDemoBySlug(slug: string): IndustryDemo | undefined {
-  return INDUSTRY_DEMOS.find((d) => d.slug === slug);
 }

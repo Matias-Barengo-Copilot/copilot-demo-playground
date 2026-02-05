@@ -3,6 +3,7 @@ import { auth } from "@/auth";
 import { LandingHeader } from "@/components/landing-header";
 import { SiteFooter } from "@/components/site-footer";
 import { LandingCategoryCard } from "@/components/landing-category-card";
+import { DigitalWorkforceSection } from "@/components/digital-workforce-section";
 import { LANDING_CATEGORIES } from "@/lib/landing-categories";
 import { getDemoCountForCategory } from "@/lib/demos-mock";
 
@@ -37,7 +38,10 @@ export default async function HomePage() {
         </section>
 
         {/* Large cards by function (2 columns, image-ready) */}
-        <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+        <section
+          id="business-functions"
+          className="scroll-mt-20 mx-auto max-w-6xl px-4 py-16 sm:px-6"
+        >
           <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-4xl">
             Business Functions
           </h2>
@@ -51,17 +55,8 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* About the portal (lightweight) */}
-        <section className="border-t border-border bg-muted/30">
-          <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-            <h2 className="text-lg font-semibold text-foreground">
-              About this portal
-            </h2>
-            <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-              One place to discover and reuse AI demos—consistent narrative, consistent branding. Built for internal alignment and enablement: sales, partnerships, and leadership.
-            </p>
-          </div>
-        </section>
+        {/* Digital Workforce — AI agents by area */}
+        <DigitalWorkforceSection />
       </main>
 
       <SiteFooter />

@@ -5,6 +5,7 @@
     "title": "Invoice processing",
     "description": "Extract and match invoices from suppliers.",
     "narrative": "From bean orders to equipment—process invoices faster with AI.",
+    "url": "https://example.com/demo/finance/invoice-processing",
     "tags": ["Finance"]
   }
 ]

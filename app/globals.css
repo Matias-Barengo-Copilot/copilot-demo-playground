@@ -1,32 +1,81 @@
-@import "tailwindcss";
+/**
+ * Global styles — CoPilot Demo Portal
+ *
+ * Structure:
+ * 1. Imports (Tailwind, plugins)
+ * 2. Custom utilities (animation)
+ * 3. Design tokens (:root, .dark)
+ * 4. Tailwind theme mapping (@theme)
+ * 5. Base styles (body)
+ * 6. Component overrides (Dialog, Admin)
+ */
 
-/* SoMa Coffee Lab–inspired: warm neutrals, coffee browns, cream background */
+/* ==========================================================================
+   1. Imports
+   ========================================================================== */
+
+@import "tailwindcss";
+@import "tailwind-animate";
+
+/* ==========================================================================
+   2. Custom utilities (tailwind-animate compatibility)
+   ========================================================================== */
+
+/* tailwind-animate exposes --animate-in/--animate-out but not the utility
+   classes; we define them here so data-[state]:animate-in/out work. */
+.animate-in {
+  animation: var(--animate-in);
+}
+.animate-out {
+  animation: var(--animate-out);
+}
+
+/* ==========================================================================
+   3. Design tokens — Light & Dark
+   ========================================================================== */
+
+/* Light theme — warm neutrals, cream background (Mountain View Coffee) */
 :root {
+  /* Base */
   --radius: 0.625rem;
   --background: oklch(0.985 0.008 85);
   --foreground: oklch(0.22 0.025 55);
+
+  /* Surfaces */
   --card: oklch(1 0.006 85);
   --card-foreground: oklch(0.22 0.025 55);
   --popover: oklch(1 0.006 85);
   --popover-foreground: oklch(0.22 0.025 55);
+
+  /* Primary & secondary */
   --primary: oklch(0.35 0.08 55);
   --primary-foreground: oklch(0.98 0.01 85);
   --secondary: oklch(0.96 0.015 85);
   --secondary-foreground: oklch(0.28 0.04 55);
+
+  /* Muted & accent */
   --muted: oklch(0.96 0.012 85);
   --muted-foreground: oklch(0.48 0.03 55);
   --accent: oklch(0.94 0.02 85);
   --accent-foreground: oklch(0.28 0.04 55);
+
+  /* Semantic */
   --destructive: oklch(0.55 0.22 27);
   --destructive-foreground: oklch(0.98 0 0);
+
+  /* Borders & inputs */
   --border: oklch(0.90 0.02 75);
   --input: oklch(0.90 0.02 75);
   --ring: oklch(0.35 0.08 55);
+
+  /* Charts */
   --chart-1: oklch(0.55 0.12 55);
   --chart-2: oklch(0.6 0.1 85);
   --chart-3: oklch(0.45 0.06 45);
   --chart-4: oklch(0.75 0.08 70);
   --chart-5: oklch(0.65 0.1 40);
+
+  /* Sidebar */
   --sidebar: oklch(0.98 0.01 85);
   --sidebar-foreground: oklch(0.22 0.025 55);
   --sidebar-primary: oklch(0.35 0.08 55);
@@ -35,7 +84,8 @@
   --sidebar-accent-foreground: oklch(0.28 0.04 55);
   --sidebar-border: oklch(0.90 0.02 75);
   --sidebar-ring: oklch(0.35 0.08 55);
-  /* Landing header / promo */
+
+  /* Landing */
   --header-bg: oklch(1 0.006 85);
   --promo-bg: oklch(0.28 0.05 55);
   --promo-foreground: oklch(0.96 0.01 85);
@@ -79,7 +129,12 @@
   --sidebar-ring: oklch(0.553 0.013 58.071);
 }
 
+/* ==========================================================================
+   4. Tailwind theme (v4) — map tokens to utilities
+   ========================================================================== */
+
 @theme inline {
+  /* Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -115,12 +170,30 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+
+  /* Radius */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* Fonts */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+/* ==========================================================================
+   5. Base styles
+   ========================================================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
@@ -129,7 +202,50 @@ body {
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
-/* Admin area: SoMa Coffee Lab–inspired warm palette */
+/* ==========================================================================
+   6. Dialog — overlay & content animations
+   ========================================================================== */
+
+@keyframes dialog-overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes dialog-overlay-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes dialog-content-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes dialog-content-out {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.96); }
+}
+
+[data-dialog-overlay][data-state="open"] {
+  animation: dialog-overlay-in 0.2s ease-out forwards;
+}
+
+[data-dialog-overlay][data-state="closed"] {
+  animation: dialog-overlay-out 0.2s ease-out forwards;
+}
+
+[data-dialog-content][data-state="open"] {
+  animation: dialog-content-in 0.25s ease-out forwards;
+}
+
+[data-dialog-content][data-state="closed"] {
+  animation: dialog-content-out 0.2s ease-out forwards;
+}
+
+/* ==========================================================================
+   7. Admin theme override (data-theme="admin")
+   ========================================================================== */
+
 [data-theme="admin"] {
   --admin-bg: oklch(0.98 0.008 85);
   --admin-card: oklch(1 0 0);

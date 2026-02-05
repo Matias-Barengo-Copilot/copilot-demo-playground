@@ -16,6 +16,10 @@ export type DemoFromMock = {
   title: string;
   description: string;
   narrative: string;
+  /** URL opened in a new tab (no in-app demo page) */
+  url: string;
+  /** Optional main image (e.g. app screenshot) for the detail modal */
+  imageUrl?: string;
   tags?: string[];
 };
 

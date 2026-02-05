@@ -1,0 +1,62 @@
+[
+  {
+    "id": "stacy",
+    "slug": "stacy",
+    "name": "Stacy",
+    "role": "HR Manager",
+    "department": "Human Resources",
+    "status": "active",
+    "description": "Handles recruitment workflows including resume screening, candidate shortlisting, and interview scheduling for Mountain View Coffee.",
+    "welcomeMessage": "Hi! I'm Stacy, your HR Manager. I can help you screen resumes, rank candidates, schedule interviews, and analyze video interviews. What would you like me to help with today?"
+  },
+  {
+    "id": "marcus",
+    "slug": "marcus",
+    "name": "Marcus",
+    "role": "Marketing Specialist",
+    "department": "Marketing",
+    "status": "active",
+    "description": "Creates engaging content, manages social media campaigns, optimizes SEO, and runs promotions for the brand.",
+    "welcomeMessage": "Hi! I'm Marcus, your Marketing Specialist. I can help with content ideas, social posts, SEO, and promotions. What would you like to work on today?"
+  },
+  {
+    "id": "alex",
+    "slug": "alex",
+    "name": "Alex",
+    "role": "Support Lead",
+    "department": "Customer Support",
+    "status": "busy",
+    "description": "Handles customer inquiries, routes tickets to appropriate teams, and ensures timely resolution and satisfaction.",
+    "welcomeMessage": "Hi! I'm Alex, your Support Lead. I can help route tickets, answer common inquiries, and ensure customers get timely responses. What do you need?"
+  },
+  {
+    "id": "jordan",
+    "slug": "jordan",
+    "name": "Jordan",
+    "role": "Operations Manager",
+    "department": "Operations",
+    "status": "active",
+    "description": "Manages inventory levels, optimizes scheduling, monitors supply chain, and keeps daily operations running smoothly.",
+    "welcomeMessage": "Hi! I'm Jordan, your Operations Manager. I can help with inventory, scheduling, supply chain, and day-to-day operations. What would you like me to help with today?"
+  },
+  {
+    "id": "taylor",
+    "slug": "taylor",
+    "name": "Taylor",
+    "role": "E-commerce Specialist",
+    "department": "Sales",
+    "status": "offline",
+    "description": "Optimizes product listings, manages online orders, handles customer checkout flows, and tracks sales performance.",
+    "welcomeMessage": "Hi! I'm Taylor, your E-commerce Specialist. I can help with product listings, orders, checkout flows, and sales metrics. What would you like to work on?"
+  },
+  {
+    "id": "casey",
+    "slug": "casey",
+    "name": "Casey",
+    "role": "Finance Analyst",
+    "department": "Finance",
+    "status": "active",
+    "description": "Processes invoices, tracks expenses, generates financial reports, and supports budgeting and forecasting.",
+    "welcomeMessage": "Hi! I'm Casey, your Finance Analyst. I can help with invoices, expenses, reports, and budgeting. What would you like me to help with today?"
+  }
+]

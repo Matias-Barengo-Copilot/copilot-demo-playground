@@ -4,7 +4,8 @@
     "slug": "support-orders",
     "title": "Order issues",
     "description": "Handle order complaints and refunds with an AI-assisted support flow.",
-    "narrative": "A customer’s order was wrong. Walk through how support resolves it with AI.",
+    "narrative": "A customer's order was wrong. Walk through how support resolves it with AI.",
+    "url": "https://example.com/demo/customer-support/order-issues",
     "tags": ["Customer Support"]
   },
   {
@@ -13,6 +14,7 @@
     "title": "Ticket routing",
     "description": "Intelligent routing and prioritization of support tickets.",
     "narrative": "Incoming requests are classified and assigned so the right person responds first.",
+    "url": "https://example.com/demo/customer-support/ticket-routing",
     "tags": ["Customer Support"]
   }
 ]
