@@ -1,0 +1,18 @@
+[
+  {
+    "id": "marketing-seasonal",
+    "slug": "marketing-seasonal",
+    "title": "Seasonal campaigns",
+    "description": "Promote seasonal drinks and events with AI-driven marketing workflows.",
+    "narrative": "Launch the fall pumpkin spice campaign and see how AI supports content and targeting.",
+    "tags": ["Marketing"]
+  },
+  {
+    "id": "social-content",
+    "slug": "social-content",
+    "title": "Social media content",
+    "description": "Generate and schedule social posts for the coffee shop brand.",
+    "narrative": "Keep Mountain View Coffee’s channels active with on-brand, timely content.",
+    "tags": ["Marketing", "SEO"]
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "id": "supply-forecast",
+    "slug": "supply-forecast",
+    "title": "Supply chain forecasting",
+    "description": "Demand and supply forecasts for beans and packaging.",
+    "narrative": "Keep stock levels right so the café never runs out of the popular roasts.",
+    "tags": ["Operations"]
+  },
+  {
+    "id": "shift-scheduling",
+    "slug": "shift-scheduling",
+    "title": "Shift scheduling",
+    "description": "AI-assisted staff scheduling based on traffic and availability.",
+    "narrative": "Balance coverage and fairness for baristas and shift leads.",
+    "tags": ["Operations"]
+  }
+]
