@@ -41,7 +41,7 @@ export default async function AdminLayout({
       </header>
 
       <div className="flex flex-1">
-        <aside className="sticky top-[57px] flex h-[calc(100vh-57px)] w-52 shrink-0 flex-col border-r border-[var(--admin-border)] bg-[var(--admin-card)] py-6">
+        <aside className="sticky top-[var(--header-height)] flex h-[calc(100vh-var(--header-height))] w-52 shrink-0 flex-col border-r border-[var(--admin-border)] bg-[var(--admin-card)] py-6">
           <div className="px-4 pb-3">
             <p className="text-xs font-medium uppercase tracking-wider text-[var(--admin-text-muted)]">
               Management

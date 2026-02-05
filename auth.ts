@@ -13,7 +13,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     signIn: async ({ user }) => {
       const allowed = await isEmailAllowed(user?.email ?? null);
-      if (!allowed) return false;
+      if (!allowed) return "/unauthorized";
       return true;
     },
     session: async ({ session }) => {

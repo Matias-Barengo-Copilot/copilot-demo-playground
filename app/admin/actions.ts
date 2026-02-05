@@ -2,11 +2,10 @@
 
 import { auth } from "@/auth";
 import { db } from "@/lib/db";
-import { users } from "@/db/schema";
-import type { UserRole } from "@/db/schema";
+import { users, userRoleEnum, type UserRole } from "@/db/schema";
 
 const EMAIL_MAX_LENGTH = 255;
-const VALID_ROLES: UserRole[] = ["admin", "presenter", "viewer"];
+const VALID_ROLES: readonly UserRole[] = userRoleEnum.enumValues;
 
 export type CreateUserState = {
   error?: string;
@@ -34,7 +33,7 @@ export async function createUser(
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return { error: "Valid email is required" };
   }
-  if (typeof roleRaw !== "string" || !VALID_ROLES.includes(roleRaw as UserRole)) {
+  if (typeof roleRaw !== "string" || !(VALID_ROLES as readonly string[]).includes(roleRaw)) {
     return { error: `Invalid role. Must be one of: ${VALID_ROLES.join(", ")}.` };
   }
   const userRole = roleRaw as UserRole;
@@ -43,8 +42,7 @@ export async function createUser(
     await db.insert(users).values({ email, name, role: userRole });
     return { success: `User ${email} created with role ${userRole}.` };
   } catch (e) {
-    const message = e instanceof Error ? e.message : "Failed to create user";
-    if (message.includes("unique") || message.includes("duplicate")) {
+    if (e && typeof e === "object" && "code" in e && (e as { code: string }).code === "23505") {
       return { error: "A user with this email already exists." };
     }
     return { error: "Failed to create user. Try again." };

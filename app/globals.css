@@ -247,6 +247,7 @@ body {
    ========================================================================== */
 
 [data-theme="admin"] {
+  --header-height: 57px;
   --admin-bg: oklch(0.98 0.008 85);
   --admin-card: oklch(1 0 0);
   --admin-border: oklch(0.91 0.015 75);

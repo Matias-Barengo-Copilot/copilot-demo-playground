@@ -2,6 +2,7 @@
 
 import { useActionState } from "react";
 import { createUser } from "./actions";
+import { userRoleEnum } from "@/db/schema";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -58,9 +59,11 @@ export function CreateUserForm() {
           required
           className="w-full border-[var(--admin-border)] bg-[var(--admin-card)] text-[var(--admin-text)] focus-visible:ring-[var(--admin-primary)]"
         >
-          <NativeSelectOption value="viewer">Viewer</NativeSelectOption>
-          <NativeSelectOption value="presenter">Presenter</NativeSelectOption>
-          <NativeSelectOption value="admin">Admin</NativeSelectOption>
+          {userRoleEnum.enumValues.map((role) => (
+            <NativeSelectOption key={role} value={role}>
+              {role.charAt(0).toUpperCase() + role.slice(1)}
+            </NativeSelectOption>
+          ))}
         </NativeSelect>
       </div>
       {state?.error && (

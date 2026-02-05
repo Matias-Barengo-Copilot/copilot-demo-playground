@@ -12,7 +12,7 @@ type BackButtonProps = {
 };
 
 /**
- * Botón "atrás" compartido para navegación. Usar en toda la app donde haga falta volver al nivel anterior.
+ * Shared back button for navigation. Use across the app where a link to the previous level is needed.
  */
 export function BackButton({ href, children, className }: BackButtonProps) {
   return (
