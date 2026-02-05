@@ -1,5 +1,42 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## CoPilot Demo Portal
+
+Login-protected demo portal. All demos are contextualized in **Mountain View Coffee**. See `docs/ACTION_PLAN.md` for the full project brief and roadmap.
+
+### Portal structure
+
+| Route | Description |
+|-------|-------------|
+| `/` | Hub: hero + three category cards (Business Functions, AI Agents, Industry) |
+| `/demos/business-functions` | Index of embedded, interactive demos (HR, Marketing, Support, etc.) |
+| `/demos/business-functions/[slug]` | Individual business-function demo page |
+| `/demos/ai-agents` | Index of AI agent simulations (coffee-themed personas) |
+| `/demos/ai-agents/[slug]` | Individual agent simulation page |
+| `/demos/industry` | Index of industry use cases; each card links to an **external** demo (opens in new tab) |
+| `/admin` | Admin area (avatar menu only; not in main nav) |
+
+### Adding demos (config-driven)
+
+Edit **`lib/demo-catalog.ts`**:
+
+- **Business Functions:** add an entry to `BUSINESS_FUNCTION_DEMOS` (id, slug, title, description, narrative, optional tags).
+- **AI Agents:** add to `AI_AGENT_DEMOS` (id, slug, title, description, agentName, narrative, type: `"simulation"`).
+- **Industry:** add to `INDUSTRY_DEMOS` (id, slug, title, description, externalUrl, industry, customerStory, type: `"external"`).
+
+Slugs are used in URLs (e.g. `/demos/business-functions/hr-hiring`). Keep slugs URL-safe (lowercase, hyphens).
+
+### Demo data in the database
+
+The same demo list is stored in the **`demos`** table for when you switch to DB-driven content. Schema: `slug`, `category` (business_function | ai_agent | industry), `title`, `description`, `narrative`, `metadata` (jsonb for tags, agentName, externalUrl, industry, customerStory), `sort_order`. Apply the migration and seed:
+
+```bash
+npx drizzle-kit push   # or run migration 0002_demos.sql
+npm run db:seed-demos  # or: npx tsx scripts/seed-demos.ts
+```
+
+The app currently reads from **`lib/demo-catalog.ts`**; the DB is ready for a future switch or for admin-managed demos.
+
 ## Getting Started
 
 First, run the development server:
@@ -34,3 +71,4 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# copilot-demo-playground
