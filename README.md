@@ -17,12 +17,10 @@ Login-protected demo portal. All demos are contextualized in **Mountain View Cof
 
 ### Adding demos (config-driven)
 
-Edit **`lib/demo-catalog.ts`**:
+- **Business Functions:** add a demo object to the corresponding JSON file in `mocks/demos/` (e.g. `recruitment-hr.json`). See `mocks/demos/README.md` for the data structure.
+- **AI Agents (Digital Workforce):** add an agent to `mocks/agents.json` and use `lib/agents-mock.ts`; for catalog-only entries use `AI_AGENT_DEMOS` in `lib/demo-catalog.ts`.
 
-- **Business Functions:** add an entry to `BUSINESS_FUNCTION_DEMOS` (id, slug, title, description, narrative, optional tags).
-- **AI Agents:** add to `AI_AGENT_DEMOS` (id, slug, title, description, agentName, narrative, type: `"simulation"`).
-
-Slugs are used in URLs (e.g. `/demos/business-functions/hr-hiring`). Keep slugs URL-safe (lowercase, hyphens).
+Slugs are used in URLs (e.g. `/demos/business-functions/recruitment-hr`, `/demos/ai-agents/stacy`). Keep slugs URL-safe (lowercase, hyphens).
 
 ### Demo data in the database
 

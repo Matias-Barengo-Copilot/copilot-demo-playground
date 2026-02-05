@@ -11,7 +11,7 @@ export default async function HomePage() {
   const session = await auth();
   if (!session?.user) redirect("/signin?callbackUrl=/");
 
-  const isAdmin = (session.user as { role?: string }).role === "admin";
+  const isAdmin = session.user.role === "admin";
 
   const categoriesWithCount = LANDING_CATEGORIES.map((cat) => ({
     ...cat,

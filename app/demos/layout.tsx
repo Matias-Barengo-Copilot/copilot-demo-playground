@@ -11,7 +11,7 @@ export default async function DemosLayout({
   const session = await auth();
   if (!session?.user) redirect("/signin?callbackUrl=/demos");
 
-  const isAdmin = (session.user as { role?: string }).role === "admin";
+  const isAdmin = session.user.role === "admin";
 
   return (
     <div className="min-h-screen flex flex-col bg-background">

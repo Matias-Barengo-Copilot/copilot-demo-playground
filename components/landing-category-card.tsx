@@ -25,7 +25,7 @@ export function LandingCategoryCard({ category }: LandingCategoryCardProps) {
         {imageUrl ? (
           <Image
             src={imageUrl}
-            alt=""
+            alt={title}
             fill
             className="object-cover transition-transform group-hover:scale-[1.02]"
             sizes="(max-width: 768px) 100vw, 50vw"

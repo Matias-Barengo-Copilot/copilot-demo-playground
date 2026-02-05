@@ -11,27 +11,26 @@ export default async function AdminLayout({
 }) {
   const session = await auth();
   if (!session?.user) redirect("/signin?callbackUrl=/admin");
-  const role = (session.user as { role?: string }).role;
-  if (role !== "admin") redirect("/");
+  if (session.user.role !== "admin") redirect("/");
 
   return (
     <div
       data-theme="admin"
-      className="flex min-h-screen flex-col bg-(--admin-bg) text-(--admin-text)"
+      className="flex min-h-screen flex-col bg-[var(--admin-bg)] text-[var(--admin-text)]"
     >
-      <header className="sticky top-0 z-10 border-b border-(--admin-border) bg-(--admin-card) shadow-sm">
+      <header className="sticky top-0 z-10 border-b border-[var(--admin-border)] bg-[var(--admin-card)] shadow-sm">
         <nav className="flex items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <div className="flex min-w-0 items-center gap-3">
             <BackButton
               href="/"
-              className="shrink-0 text-(--admin-text-muted) hover:bg-(--admin-accent) hover:text-(--admin-text)"
+              className="shrink-0 text-[var(--admin-text-muted)] hover:bg-[var(--admin-accent)] hover:text-[var(--admin-text)]"
             >
               Home
             </BackButton>
-            <span className="hidden text-(--admin-text-muted) sm:inline" aria-hidden>
+            <span className="hidden text-[var(--admin-text-muted)] sm:inline" aria-hidden>
               |
             </span>
-            <span className="truncate text-sm font-medium text-(--admin-text) sm:inline">
+            <span className="truncate text-sm font-medium text-[var(--admin-text)] sm:inline">
               Admin
             </span>
           </div>
@@ -42,16 +41,16 @@ export default async function AdminLayout({
       </header>
 
       <div className="flex flex-1">
-        <aside className="sticky top-[57px] flex h-[calc(100vh-57px)] w-52 shrink-0 flex-col border-r border-(--admin-border) bg-(--admin-card) py-6">
+        <aside className="sticky top-[57px] flex h-[calc(100vh-57px)] w-52 shrink-0 flex-col border-r border-[var(--admin-border)] bg-[var(--admin-card)] py-6">
           <div className="px-4 pb-3">
-            <p className="text-xs font-medium uppercase tracking-wider text-(--admin-text-muted)">
+            <p className="text-xs font-medium uppercase tracking-wider text-[var(--admin-text-muted)]">
               Management
             </p>
           </div>
           <nav className="flex-1 space-y-0.5 px-3">
             <Link
               href="/admin"
-              className="flex items-center rounded-lg px-3 py-2.5 text-sm font-medium text-(--admin-text) bg-(--admin-accent)"
+              className="flex items-center rounded-lg px-3 py-2.5 text-sm font-medium text-[var(--admin-text)] bg-[var(--admin-accent)]"
             >
               Create users
             </Link>

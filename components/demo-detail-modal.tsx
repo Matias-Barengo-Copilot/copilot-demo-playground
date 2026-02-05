@@ -29,7 +29,7 @@ export function DemoDetailModal({
       {imageUrl ? (
         <Image
           src={imageUrl}
-          alt=""
+          alt={title}
           fill
           className="object-cover"
           sizes="(max-width: 640px) 100vw, 32rem"

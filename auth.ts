@@ -20,7 +20,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       const email = session?.user?.email;
       if (email) {
         const appUser = await getUserByEmail(email);
-        if (appUser) (session.user as { role?: string }).role = appUser.role;
+        if (appUser) session.user.role = appUser.role;
       }
       return session;
     },

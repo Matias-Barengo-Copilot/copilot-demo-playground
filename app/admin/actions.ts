@@ -18,8 +18,7 @@ export async function createUser(
   formData: FormData
 ): Promise<CreateUserState> {
   const session = await auth();
-  const role = (session?.user as { role?: string } | undefined)?.role;
-  if (role !== "admin") {
+  if (session?.user?.role !== "admin") {
     return { error: "Unauthorized" };
   }
 
@@ -35,7 +34,10 @@ export async function createUser(
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return { error: "Valid email is required" };
   }
-  const userRole = (VALID_ROLES.includes(roleRaw as UserRole) ? roleRaw : "viewer") as UserRole;
+  if (typeof roleRaw !== "string" || !VALID_ROLES.includes(roleRaw as UserRole)) {
+    return { error: `Invalid role. Must be one of: ${VALID_ROLES.join(", ")}.` };
+  }
+  const userRole = roleRaw as UserRole;
 
   try {
     await db.insert(users).values({ email, name, role: userRole });

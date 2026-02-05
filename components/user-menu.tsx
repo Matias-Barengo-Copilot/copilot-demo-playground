@@ -45,7 +45,7 @@ export function UserMenu({ user, isAdmin }: { user: User; isAdmin?: boolean }) {
           aria-label="Open account menu"
         >
           <Avatar size="lg" className="ring-2 ring-border">
-            <AvatarImage src={user.image ?? undefined} alt="" />
+            <AvatarImage src={user.image ?? undefined} alt={displayName} />
             <AvatarFallback className="bg-primary/10 text-primary text-sm font-medium">
               {getInitials(user)}
             </AvatarFallback>
