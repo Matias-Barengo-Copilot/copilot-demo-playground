@@ -3,7 +3,7 @@ import { LANDING_CATEGORIES } from "@/lib/landing-categories";
 import {
   getDemosForCategory,
   isValidCategoryId,
-} from "@/lib/demos-mock";
+} from "@/lib/demos-db";
 import { CategoryDemosGrid } from "@/components/category-demos-grid";
 import { BackButton } from "@/components/back-button";
 
@@ -18,7 +18,7 @@ export default async function BusinessFunctionCategoryPage({ params }: Props) {
   if (!isValidCategoryId(categorySlug)) notFound();
 
   const category = getCategoryBySlug(categorySlug);
-  const demos = getDemosForCategory(categorySlug);
+  const demos = await getDemosForCategory(categorySlug);
 
   return (
     <div>
@@ -36,7 +36,7 @@ export default async function BusinessFunctionCategoryPage({ params }: Props) {
           <CategoryDemosGrid demos={demos} />
         ) : (
           <p className="text-muted-foreground">
-            No demos in this category yet. Add entries to the JSON mock for this category.
+            No demos in this category yet. Add demos from the admin or run the seed script.
           </p>
         )}
       </div>

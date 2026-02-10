@@ -29,6 +29,8 @@ export type AppModalProps = {
   footer?: React.ReactNode;
   /** Extra class for the content container. */
   contentClassName?: string;
+  /** Use dark theme (zinc/black) to match landing. */
+  variant?: "default" | "dark";
   /** Accessibility: describe the dialog for screen readers. */
   "aria-describedby"?: string;
 };
@@ -37,6 +39,19 @@ export type AppModalProps = {
  * Shared modal layout: header (title + close), optional media, scrollable body, optional footer.
  * Use this across the app for a consistent modal UI.
  */
+const darkContentClasses =
+  "border-zinc-700 bg-gradient-to-br from-zinc-800 to-zinc-900 text-white shadow-xl";
+const darkHeaderClasses =
+  "flex flex-row items-start justify-between gap-4 border-b border-zinc-700 bg-zinc-800/50 px-5 py-4";
+const darkMediaClasses = "shrink-0 overflow-hidden border-b border-zinc-700 bg-zinc-900/50";
+const darkBodyClasses = "min-h-0 flex-1 px-5 py-4 text-zinc-200";
+const darkFooterClasses =
+  "shrink-0 border-t border-zinc-700 bg-zinc-800/50 px-5 py-4";
+const darkCloseButtonClasses =
+  "shrink-0 rounded-lg p-2 text-zinc-400 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30";
+const darkTitleClasses = "text-left text-lg font-semibold tracking-tight text-white";
+const darkDescriptionClasses = "text-left text-sm text-zinc-400";
+
 export function AppModal({
   open,
   onOpenChange,
@@ -46,24 +61,43 @@ export function AppModal({
   children,
   footer,
   contentClassName,
+  variant = "default",
   "aria-describedby": ariaDescribedBy,
 }: AppModalProps) {
+  const isDark = variant === "dark";
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         className={cn(
           "flex max-h-[90vh] w-full flex-col gap-0 p-0 sm:max-w-xl",
+          isDark && darkContentClasses,
           contentClassName
         )}
         aria-describedby={ariaDescribedBy}
       >
-        <DialogHeader className="flex flex-row items-start justify-between gap-4 border-b border-border bg-muted/20 px-5 py-4">
+        <DialogHeader
+          className={cn(
+            "flex flex-row items-start justify-between gap-4 border-b px-5 py-4",
+            isDark ? darkHeaderClasses : "border-border bg-muted/20"
+          )}
+        >
           <div className="min-w-0 flex-1 space-y-1">
-            <DialogTitle className="text-left text-lg font-semibold tracking-tight text-foreground">
+            <DialogTitle
+              className={cn(
+                "text-left text-lg font-semibold tracking-tight",
+                isDark ? darkTitleClasses : "text-foreground"
+              )}
+            >
               {title}
             </DialogTitle>
             {description != null && (
-              <DialogDescription className="text-left text-sm text-muted-foreground">
+              <DialogDescription
+                className={cn(
+                  "text-left text-sm",
+                  isDark ? darkDescriptionClasses : "text-muted-foreground"
+                )}
+              >
                 {description}
               </DialogDescription>
             )}
@@ -72,7 +106,12 @@ export function AppModal({
             <button
               type="button"
               onClick={() => onOpenChange(false)}
-              className="shrink-0 rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className={cn(
+                "shrink-0 rounded-lg p-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                isDark
+                  ? darkCloseButtonClasses
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
+              )}
               aria-label="Close"
             >
               <XIcon className="size-5" />
@@ -82,17 +121,32 @@ export function AppModal({
 
         {media != null && (
           <div
-            className="shrink-0 overflow-hidden border-b border-border bg-muted/30"
+            className={cn(
+              "shrink-0 overflow-hidden border-b",
+              isDark ? darkMediaClasses : "border-border bg-muted/30"
+            )}
             data-slot="app-modal-media"
           >
             {media}
           </div>
         )}
 
-        <DialogBody className="min-h-0 flex-1 px-5 py-4">{children}</DialogBody>
+        <DialogBody
+          className={cn(
+            "min-h-0 flex-1 px-5 py-4",
+            isDark && darkBodyClasses
+          )}
+        >
+          {children}
+        </DialogBody>
 
         {footer != null && (
-          <DialogFooter className="shrink-0 border-t border-border bg-muted/20 px-5 py-4">
+          <DialogFooter
+            className={cn(
+              "shrink-0 border-t px-5 py-4",
+              isDark ? darkFooterClasses : "border-border bg-muted/20"
+            )}
+          >
             {footer}
           </DialogFooter>
         )}

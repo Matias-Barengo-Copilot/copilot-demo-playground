@@ -30,6 +30,21 @@
   animation: var(--animate-out);
 }
 
+/* Flip card (Business Functions) — 3D transform and backface visibility */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
 /* ==========================================================================
    3. Design tokens — Light & Dark
    ========================================================================== */
@@ -180,6 +195,7 @@
   /* Fonts */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-brand: var(--font-playfair);
 }
 
 /* ==========================================================================

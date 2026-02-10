@@ -3,18 +3,18 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { DemoDetailModal } from "@/components/demo-detail-modal";
-import type { DemoFromMock } from "@/lib/demos-mock";
+import type { BusinessFunctionDemo } from "@/lib/demos-db";
 import { ExternalLink } from "lucide-react";
 
 type CategoryDemosGridProps = {
-  demos: DemoFromMock[];
+  demos: BusinessFunctionDemo[];
 };
 
 export function CategoryDemosGrid({ demos }: CategoryDemosGridProps) {
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedDemo, setSelectedDemo] = useState<DemoFromMock | null>(null);
+  const [selectedDemo, setSelectedDemo] = useState<BusinessFunctionDemo | null>(null);
 
-  const openModal = (demo: DemoFromMock) => {
+  const openModal = (demo: BusinessFunctionDemo) => {
     setSelectedDemo(demo);
     setModalOpen(true);
   };

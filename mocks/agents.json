@@ -7,7 +7,10 @@
     "department": "Human Resources",
     "status": "active",
     "description": "Handles recruitment workflows including resume screening, candidate shortlisting, and interview scheduling for Mountain View Coffee.",
-    "welcomeMessage": "Hi! I'm Stacy, your HR Manager. I can help you screen resumes, rank candidates, schedule interviews, and analyze video interviews. What would you like me to help with today?"
+    "welcomeMessage": "Hi! I'm Stacy, your HR Manager. I can help you screen resumes, rank candidates, schedule interviews, and analyze video interviews. What would you like me to help with today?",
+    "imageUrl": "https://images.unsplash.com/photo-1655249493799-9cee4fe983bb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+    "capabilities": ["Recruitment", "Onboarding", "Staff Support"],
+    "actions": ["Post a job opening", "Screen candidates", "Answer staff questions"]
   },
   {
     "id": "marcus",
@@ -17,7 +20,10 @@
     "department": "Marketing",
     "status": "active",
     "description": "Creates engaging content, manages social media campaigns, optimizes SEO, and runs promotions for the brand.",
-    "welcomeMessage": "Hi! I'm Marcus, your Marketing Specialist. I can help with content ideas, social posts, SEO, and promotions. What would you like to work on today?"
+    "welcomeMessage": "Hi! I'm Marcus, your Marketing Specialist. I can help with content ideas, social posts, SEO, and promotions. What would you like to work on today?",
+    "imageUrl": "https://images.unsplash.com/photo-1762753674498-73ec49feafc4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+    "capabilities": ["Content Creation", "Analytics", "Campaigns"],
+    "actions": ["Create social content", "Analyze trends", "Plan campaign"]
   },
   {
     "id": "alex",
@@ -27,7 +33,10 @@
     "department": "Customer Support",
     "status": "busy",
     "description": "Handles customer inquiries, routes tickets to appropriate teams, and ensures timely resolution and satisfaction.",
-    "welcomeMessage": "Hi! I'm Alex, your Support Lead. I can help route tickets, answer common inquiries, and ensure customers get timely responses. What do you need?"
+    "welcomeMessage": "Hi! I'm Alex, your Support Lead. I can help route tickets, answer common inquiries, and ensure customers get timely responses. What do you need?",
+    "imageUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+    "capabilities": ["Ticketing", "Inquiries", "Resolution"],
+    "actions": ["Route a ticket", "Answer inquiry", "Follow up with customer"]
   },
   {
     "id": "jordan",
@@ -37,7 +46,10 @@
     "department": "Operations",
     "status": "active",
     "description": "Manages inventory levels, optimizes scheduling, monitors supply chain, and keeps daily operations running smoothly.",
-    "welcomeMessage": "Hi! I'm Jordan, your Operations Manager. I can help with inventory, scheduling, supply chain, and day-to-day operations. What would you like me to help with today?"
+    "welcomeMessage": "Hi! I'm Jordan, your Operations Manager. I can help with inventory, scheduling, supply chain, and day-to-day operations. What would you like me to help with today?",
+    "imageUrl": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+    "capabilities": ["Inventory", "Suppliers", "Quality"],
+    "actions": ["Check inventory", "Order supplies", "Review quality metrics"]
   },
   {
     "id": "taylor",
@@ -47,7 +59,10 @@
     "department": "Sales",
     "status": "offline",
     "description": "Optimizes product listings, manages online orders, handles customer checkout flows, and tracks sales performance.",
-    "welcomeMessage": "Hi! I'm Taylor, your E-commerce Specialist. I can help with product listings, orders, checkout flows, and sales metrics. What would you like to work on?"
+    "welcomeMessage": "Hi! I'm Taylor, your E-commerce Specialist. I can help with product listings, orders, checkout flows, and sales metrics. What would you like to work on?",
+    "imageUrl": "https://images.unsplash.com/photo-1580489944761-15a19d654956?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+    "capabilities": ["Listings", "Orders", "Checkout"],
+    "actions": ["Optimize a listing", "Manage orders", "Track sales"]
   },
   {
     "id": "casey",
@@ -57,6 +72,9 @@
     "department": "Finance",
     "status": "active",
     "description": "Processes invoices, tracks expenses, generates financial reports, and supports budgeting and forecasting.",
-    "welcomeMessage": "Hi! I'm Casey, your Finance Analyst. I can help with invoices, expenses, reports, and budgeting. What would you like me to help with today?"
+    "welcomeMessage": "Hi! I'm Casey, your Finance Analyst. I can help with invoices, expenses, reports, and budgeting. What would you like me to help with today?",
+    "imageUrl": "https://images.unsplash.com/photo-1672685667592-0392f458f46f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+    "capabilities": ["Budgeting", "Reporting", "Forecasting"],
+    "actions": ["Review expenses", "Generate report", "Forecast revenue"]
   }
 ]

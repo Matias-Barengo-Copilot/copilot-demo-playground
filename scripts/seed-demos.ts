@@ -1,108 +1,68 @@
 /**
- * Seed example demos into the demos table.
- * Data mirrors lib/demo-catalog.ts; schema may change when real demos arrive.
+ * Seed example business function demos into business_function_demos table.
  *
  * Usage: npx tsx scripts/seed-demos.ts
  * Requires DATABASE_URL in .env.
+ * Idempotent: re-running skips rows that already exist (unique on category_slug + title).
  */
 import "dotenv/config";
 import { db } from "../lib/db";
-import { demos } from "../db/schema";
+import { businessFunctionDemos } from "../db/schema";
 
 const SEED_DEMOS = [
-  // Business Functions
   {
-    slug: "hr-hiring",
-    category: "business_function" as const,
-    title: "HR: Hiring baristas",
+    categorySlug: "recruitment-hr" as const,
+    title: "Hiring baristas",
     description:
       "See how AI helps Mountain View Coffee recruit and screen barista candidates.",
     narrative:
       "Mountain View Coffee is scaling. Use this demo to explore AI-assisted hiring for front-of-house roles.",
-    metadata: { tags: ["HR", "Recruitment"] },
+    metadata: { tags: ["HR", "Recruitment"], url: "https://example.com/demo/recruitment-hr/hr-hiring" },
     sortOrder: 0,
   },
   {
-    slug: "marketing-seasonal",
-    category: "business_function" as const,
-    title: "Marketing: Seasonal campaigns",
+    categorySlug: "recruitment-hr" as const,
+    title: "Resume screening",
+    description: "AI-powered resume screening and candidate shortlisting for open positions.",
+    narrative: "Filter and rank applicants for barista and shift lead roles with consistent criteria.",
+    metadata: { tags: ["HR", "Recruitment"], url: "https://example.com/demo/recruitment-hr/resume-screening" },
+    sortOrder: 1,
+  },
+  {
+    categorySlug: "marketing-seo" as const,
+    title: "Seasonal campaigns",
     description: "Promote seasonal drinks and events with AI-driven marketing workflows.",
     narrative:
       "Launch the fall pumpkin spice campaign and see how AI supports content and targeting.",
-    metadata: { tags: ["Marketing"] },
-    sortOrder: 1,
+    metadata: { tags: ["Marketing"], url: "https://example.com/demo/marketing-seo/seasonal-campaigns" },
+    sortOrder: 0,
   },
   {
-    slug: "support-orders",
-    category: "business_function" as const,
-    title: "Customer support: Order issues",
+    categorySlug: "customer-support" as const,
+    title: "Order issues",
     description: "Handle order complaints and refunds with an AI-assisted support flow.",
-    narrative:
-      "A customer's order was wrong. Walk through how support resolves it with AI.",
-    metadata: { tags: ["Customer Support"] },
-    sortOrder: 2,
-  },
-  // AI Agents
-  {
-    slug: "barista-bot",
-    category: "ai_agent" as const,
-    title: "Barista Bot",
-    description:
-      "A simulated AI agent that helps with drink recommendations and order handling.",
-    narrative:
-      "Mocha is Mountain View Coffee's virtual barista—friendly, fast, and always suggesting the right drink.",
-    metadata: { agentName: "Mocha" },
+    narrative: "A customer's order was wrong. Walk through how support resolves it with AI.",
+    metadata: { tags: ["Customer Support"], url: "https://example.com/demo/customer-support/order-issues" },
     sortOrder: 0,
   },
   {
-    slug: "inventory-agent",
-    category: "ai_agent" as const,
-    title: "Inventory assistant",
-    description: "Simulated agent that answers questions about stock and reordering.",
-    narrative:
-      "Bean Counter keeps the back office in order. Ask about beans, supplies, and restock schedules.",
-    metadata: { agentName: "Bean Counter" },
-    sortOrder: 1,
-  },
-  // Industry
-  {
-    slug: "ohio-gratings",
-    category: "industry" as const,
-    title: "Ohio Gratings",
-    description: "Industry-specific AI demo: manufacturing and operations.",
-    narrative:
-      "Ohio Gratings is a long-time customer of Mountain View Coffee. See how they use AI in their manufacturing workflows.",
-    metadata: {
-      externalUrl: "https://example.com/ohio-gratings-demo",
-      industry: "Manufacturing",
-      customerStory:
-        "Ohio Gratings is a long-time customer of Mountain View Coffee. See how they use AI in their manufacturing workflows.",
-    },
+    categorySlug: "finance" as const,
+    title: "Invoice processing",
+    description: "Extract and match invoices from suppliers.",
+    narrative: "From bean orders to equipment—process invoices faster with AI.",
+    metadata: { tags: ["Finance"], url: "https://example.com/demo/finance/invoice-processing" },
     sortOrder: 0,
-  },
-  {
-    slug: "acme-retail",
-    category: "industry" as const,
-    title: "Acme Retail",
-    description: "AI for retail inventory and customer experience.",
-    narrative:
-      "Acme Retail stops by for coffee every morning. Discover how they apply AI in their stores.",
-    metadata: {
-      externalUrl: "https://example.com/acme-retail-demo",
-      industry: "Retail",
-      customerStory:
-        "Acme Retail stops by for coffee every morning. Discover how they apply AI in their stores.",
-    },
-    sortOrder: 1,
   },
 ];
 
 async function main() {
-  const result = await db
-    .insert(demos)
+  await db
+    .insert(businessFunctionDemos)
     .values(SEED_DEMOS)
-    .onConflictDoNothing({ target: demos.slug });
-  console.log("Seed demos: inserted or skipped (slug conflict). Run count:", SEED_DEMOS.length);
+    .onConflictDoNothing({
+      target: [businessFunctionDemos.categorySlug, businessFunctionDemos.title],
+    });
+  console.log(`Seed demos: ${SEED_DEMOS.length} processed (inserted or skipped on conflict).`);
 }
 
 main().catch((e) => {

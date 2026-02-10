@@ -2,7 +2,7 @@
 
 ## `agents.json` — Digital Workforce
 
-AI agents (LLMs by business area). Used by `lib/agents-mock.ts` and the **Digital Workforce** section on the home page and `/demos/ai-agents`.
+AI agents (LLMs by business area). Used by `lib/agents.ts` and the **Digital Workforce** section on the home page and `/demos/ai-agents/[slug]`. Data is loaded from this mock; replace with DB in `lib/agents.ts` when ready.
 
 **Per-agent shape:**
 
@@ -18,6 +18,4 @@ AI agents (LLMs by business area). Used by `lib/agents-mock.ts` and the **Digita
 }
 ```
 
-## `demos/` — Business Functions
-
-One JSON file per category. See `demos/README.md` for the demo shape and usage.
+Business Function demos are stored in the **database** (`lib/demos-db.ts`, `scripts/seed-demos.ts`), not in this folder.
