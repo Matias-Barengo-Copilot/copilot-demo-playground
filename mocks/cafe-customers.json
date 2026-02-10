@@ -1,0 +1,57 @@
+[
+  {
+    "id": "1",
+    "name": "Sarah Chen",
+    "title": "Sales Lead",
+    "company": "TechCore Manufacturing",
+    "industry": "Manufacturing",
+    "aiUseCase": "Automates lead qualification and proposal generation, cutting response time from days to hours.",
+    "impact": "3x faster sales cycle",
+    "position": { "left": "15%", "top": "35%" },
+    "externalLink": "#manufacturing"
+  },
+  {
+    "id": "2",
+    "name": "Michael Torres",
+    "title": "Operations Manager",
+    "company": "HealthFirst Clinic",
+    "industry": "Healthcare",
+    "aiUseCase": "Uses AI to schedule patients, manage inventory, and handle insurance verification automatically.",
+    "impact": "40% reduction in admin work",
+    "position": { "left": "45%", "top": "40%" },
+    "externalLink": "#healthcare"
+  },
+  {
+    "id": "3",
+    "name": "Emma Liu",
+    "title": "Marketing Director",
+    "company": "Urban Retail Co",
+    "industry": "Retail",
+    "aiUseCase": "AI creates personalized campaigns, analyzes customer sentiment, and optimizes ad spend in real-time.",
+    "impact": "2.5x ROAS improvement",
+    "position": { "left": "75%", "top": "30%" },
+    "externalLink": "#retail"
+  },
+  {
+    "id": "4",
+    "name": "David Park",
+    "title": "Finance Lead",
+    "company": "ProServices Group",
+    "industry": "Professional Services",
+    "aiUseCase": "Automates expense tracking, generates financial reports, and flags budget anomalies before they escalate.",
+    "impact": "Save 15 hrs/week on reporting",
+    "position": { "left": "30%", "top": "60%" },
+    "externalLink": "#services"
+  },
+  {
+    "id": "5",
+    "name": "Ana Rodriguez",
+    "title": "Product Manager",
+    "company": "Digital Solutions Inc",
+    "industry": "Technology",
+    "aiUseCase": "AI analyzes user feedback, prioritizes feature requests, and drafts product specs based on customer needs.",
+    "impact": "60% faster roadmap planning",
+    "position": { "left": "65%", "top": "65%" },
+    "externalLink": "#technology"
+  }
+]

@@ -15,10 +15,10 @@ Login-protected demo portal. All demos are contextualized in **Mountain View Cof
 | `/demos/ai-agents/[slug]` | Individual agent chat page |
 | `/admin` | Admin area (avatar menu only; not in main nav) |
 
-### Adding demos (config-driven)
+### Adding demos
 
-- **Business Functions:** add a demo object to the corresponding JSON file in `mocks/demos/` (e.g. `recruitment-hr.json`). See `mocks/demos/README.md` for the data structure.
-- **AI Agents (Digital Workforce):** add an agent to `mocks/agents.json` and use `lib/agents-mock.ts`; for catalog-only entries use `AI_AGENT_DEMOS` in `lib/demo-catalog.ts`.
+- **Business Functions:** demos are stored in the database. Insert into the `demos` table with `category = 'business_function'`, `business_function_slug` set to one of the 6 categories (e.g. `recruitment-hr`), and `metadata` with `url`, optional `imageUrl` and `tags`. See `scripts/seed-demos.ts` and `db/schema.ts` for the shape. Run `npm run db:seed-demos` for example data.
+- **AI Agents (Digital Workforce):** add an agent to `mocks/agents.json`; the app reads them via `lib/agents.ts` (mocks for now; replace with DB when ready).
 
 Slugs are used in URLs (e.g. `/demos/business-functions/recruitment-hr`, `/demos/ai-agents/stacy`). Keep slugs URL-safe (lowercase, hyphens).
 
@@ -31,7 +31,7 @@ npx drizzle-kit push   # or run migration 0002_demos.sql
 npm run db:seed-demos  # or: npx tsx scripts/seed-demos.ts
 ```
 
-The app currently reads from **`lib/demo-catalog.ts`**; the DB is ready for a future switch or for admin-managed demos.
+Business Function demos are read from the DB via **`lib/demos-db.ts`**; AI agents from **`mocks/agents.json`** via **`lib/agents.ts`** (mocks; replace with DB when ready).
 
 ## Getting Started
 

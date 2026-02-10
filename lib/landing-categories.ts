@@ -3,8 +3,10 @@
  * Each card can have an optional image; structure is ready for when we have assets.
  */
 
+import type { BusinessFunctionSlug } from "@/db/schema";
+
 export type LandingCategory = {
-  id: string;
+  id: BusinessFunctionSlug;
   title: string;
   description: string;
   /** Route to the list of demos for this category */

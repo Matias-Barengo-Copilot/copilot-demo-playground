@@ -1,65 +1,81 @@
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
-import { LandingHeader } from "@/components/landing-header";
-import { SiteFooter } from "@/components/site-footer";
-import { LandingCategoryCard } from "@/components/landing-category-card";
+import { Hero } from "@/components/hero";
+import { BusinessFunctionCards } from "@/components/business-function-cards";
 import { DigitalWorkforceSection } from "@/components/digital-workforce-section";
 import { LANDING_CATEGORIES } from "@/lib/landing-categories";
-import { getDemoCountForCategory } from "@/lib/demos-mock";
+import {
+  getDemoCountsForAllCategories,
+  getDemosForAllCategories,
+} from "@/lib/demos-db";
+import { getCafeCustomers } from "@/lib/cafe-customers";
+import { CafeCustomersSection } from "@/components/cafe-customers-section";
 
 export default async function HomePage() {
   const session = await auth();
   if (!session?.user) redirect("/signin?callbackUrl=/");
 
-  const isAdmin = session.user.role === "admin";
-
+  const [counts, demosByCategory] = await Promise.all([
+    getDemoCountsForAllCategories(),
+    getDemosForAllCategories(),
+  ]);
+  const cafeCustomers = getCafeCustomers();
   const categoriesWithCount = LANDING_CATEGORIES.map((cat) => ({
     ...cat,
-    demoCount: getDemoCountForCategory(cat.id),
+    demoCount: counts[cat.id] ?? 0,
   }));
 
   return (
-    <div className="min-h-screen bg-background">
-      <LandingHeader user={session.user} isAdmin={isAdmin} />
+    <div
+      className="dark min-h-screen w-full bg-black"
+    >
+      <Hero />
 
       <main>
-        {/* Hero */}
-        <section className="border-b border-border bg-card/50">
-          <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28 text-center">
-            <h1 className="mb-4 text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
-              CoPilot Demo Portal
-            </h1>
-            <p className="mx-auto max-w-xl text-lg text-muted-foreground">
-              All demos are contextualized in{" "}
-              <strong className="text-foreground">Mountain View Coffee</strong>
-              —a single story so every use case is easy to find and reuse for sales, partners, and execs.
-            </p>
+        {/* Quote section — gradient from Figma: from-black to-zinc-900 */}
+        <section
+          className="relative w-full py-32 px-6 bg-linear-to-b from-black to-zinc-900"
+          aria-label="Quote"
+        >
+          <div className="max-w-5xl mx-auto">
+            <div className="relative text-center">
+              <blockquote className="text-3xl md:text-4xl lg:text-5xl text-white/90 italic leading-relaxed mb-8">
+                &ldquo;In a bustling café, data flows like espresso. But how do you harness the chaos?&rdquo;
+              </blockquote>
+              <p className="text-xl md:text-2xl text-zinc-400 max-w-3xl mx-auto">
+                The best systems are the ones you don&apos;t notice. See how each part of the business runs smoothly behind the scenes.
+              </p>
+            </div>
           </div>
         </section>
 
-        {/* Large cards by function (2 columns, image-ready) */}
+        {/* How Things Work — gradient from Figma: from-zinc-900 to-zinc-950, full width */}
         <section
           id="business-functions"
-          className="scroll-mt-20 mx-auto max-w-6xl px-4 py-16 sm:px-6"
+          className="relative w-full bg-linear-to-b from-zinc-900 to-zinc-950 scroll-mt-20 py-24"
         >
-          <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Business Functions
-          </h2>
-          <p className="mt-3 text-lg font-normal text-muted-foreground">
-            Explore AI capabilities across different areas of your business
-          </p>
-          <div className="mt-10 grid gap-8 sm:grid-cols-2">
-            {categoriesWithCount.map((category) => (
-              <LandingCategoryCard key={category.id} category={category} />
-            ))}
+          <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+            <div className="text-center mb-16">
+              <h2 className="text-5xl md:text-6xl text-white mb-6">
+                How This Business Runs
+              </h2>
+              <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
+                From hiring to serving, every part of the operation runs smoothly.
+              </p>
+            </div>
+            <BusinessFunctionCards
+              categories={categoriesWithCount}
+              demosByCategory={demosByCategory}
+            />
           </div>
         </section>
 
         {/* Digital Workforce — AI agents by area */}
-        <DigitalWorkforceSection />
-      </main>
+        <DigitalWorkforceSection darkBackground />
 
-      <SiteFooter />
+        {/* Customers in the Café — hover personas on café image */}
+        <CafeCustomersSection customers={cafeCustomers} />
+      </main>
     </div>
   );
 }

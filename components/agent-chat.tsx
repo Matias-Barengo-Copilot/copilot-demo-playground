@@ -4,7 +4,7 @@ import * as React from "react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import type { Agent, AgentStatus } from "@/lib/agents-mock";
+import type { Agent, AgentStatus } from "@/lib/agents";
 import { Send } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -14,15 +14,15 @@ const statusConfig: Record<
 > = {
   active: {
     label: "Active",
-    pillClass: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400",
+    pillClass: "bg-emerald-500/20 text-emerald-400",
   },
   busy: {
     label: "Busy",
-    pillClass: "bg-amber-500/15 text-amber-700 dark:text-amber-400",
+    pillClass: "bg-amber-500/20 text-amber-400",
   },
   offline: {
     label: "Offline",
-    pillClass: "bg-muted/80 text-muted-foreground",
+    pillClass: "bg-zinc-600/80 text-zinc-400",
   },
 };
 
@@ -80,57 +80,57 @@ export function AgentChat({ agent }: AgentChatProps) {
   }, [messages]);
 
   return (
-    <div className="flex h-[calc(100vh-8rem)] min-h-[420px] flex-col rounded-xl border border-border bg-card shadow-sm">
+    <div className="flex h-full min-h-[420px] flex-col rounded-2xl border border-zinc-700 bg-linear-to-br from-zinc-800 to-zinc-900 shadow-xl">
       {/* Header */}
-      <header className="flex shrink-0 items-center gap-3 border-b border-border px-4 py-3">
-        <Avatar className="size-10 shrink-0 rounded-full bg-orange-500 text-white">
-          <AvatarFallback className="text-base font-semibold">
+      <header className="flex shrink-0 items-center gap-4 border-b border-zinc-700 bg-zinc-800/50 px-5 py-4">
+        <Avatar className="size-12 shrink-0 rounded-full border-2 border-white/20 bg-orange-500 text-white">
+          <AvatarFallback className="text-lg font-semibold">
             {agent.name.charAt(0)}
           </AvatarFallback>
         </Avatar>
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="font-semibold text-foreground">{agent.name}</span>
+            <span className="text-lg font-semibold text-white">{agent.name}</span>
             <span
               className={cn(
-                "rounded-md px-2 py-0.5 text-xs font-medium",
+                "rounded-md px-2.5 py-1 text-xs font-medium",
                 config.pillClass
               )}
             >
               {config.label}
             </span>
           </div>
-          <p className="text-sm text-muted-foreground">
+          <p className="mt-0.5 text-sm text-zinc-400">
             {agent.role} · {agent.department}
           </p>
         </div>
       </header>
 
       {/* Messages */}
-      <div className="flex-1 min-h-0 overflow-y-auto px-4 py-4">
-        <div className="space-y-4">
+      <div className="flex min-h-0 flex-1 flex-col overflow-y-auto px-5 py-5">
+        <div className="space-y-5">
           {messages.map((msg) =>
             msg.role === "agent" ? (
               <div key={msg.id} className="flex gap-3">
-                <Avatar className="size-8 shrink-0 rounded-full bg-orange-500 text-white">
+                <Avatar className="size-9 shrink-0 rounded-full bg-orange-500 text-white">
                   <AvatarFallback className="text-sm font-semibold">
                     {agent.name.charAt(0)}
                   </AvatarFallback>
                 </Avatar>
                 <div className="flex-1 space-y-1">
-                  <div className="rounded-2xl rounded-tl-sm bg-muted/80 px-4 py-2.5 text-sm text-foreground">
+                  <div className="rounded-2xl rounded-tl-sm bg-white/10 px-4 py-3 text-sm text-zinc-100">
                     {msg.content}
                   </div>
-                  <p className="text-xs text-muted-foreground">{msg.time}</p>
+                  <p className="text-xs text-zinc-500">{msg.time}</p>
                 </div>
               </div>
             ) : (
               <div key={msg.id} className="flex justify-end">
                 <div className="max-w-[85%] space-y-1 text-right">
-                  <div className="rounded-2xl rounded-tr-sm bg-primary px-4 py-2.5 text-sm text-primary-foreground">
+                  <div className="rounded-2xl rounded-tr-sm bg-amber-500/90 px-4 py-3 text-sm text-white">
                     {msg.content}
                   </div>
-                  <p className="text-xs text-muted-foreground">{msg.time}</p>
+                  <p className="text-xs text-zinc-500">{msg.time}</p>
                 </div>
               </div>
             )
@@ -140,27 +140,27 @@ export function AgentChat({ agent }: AgentChatProps) {
       </div>
 
       {/* Input + disclaimer */}
-      <div className="shrink-0 border-t border-border px-4 py-3">
-        <div className="flex gap-2">
+      <div className="shrink-0 border-t border-zinc-700 bg-zinc-800/30 px-5 py-4">
+        <div className="flex gap-3">
           <Input
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder={`Message ${agent.name}...`}
-            className="min-w-0 flex-1"
+            className="min-w-0 flex-1 border-zinc-600 bg-zinc-800/50 text-white placeholder:text-zinc-500 focus-visible:ring-amber-500/50"
             aria-label={`Message ${agent.name}`}
           />
           <Button
             type="button"
             size="icon"
-            className="shrink-0 bg-orange-500 hover:bg-orange-600"
+            className="size-11 shrink-0 bg-amber-500 text-white hover:bg-amber-600"
             onClick={handleSend}
             aria-label="Send message"
           >
-            <Send className="size-4" />
+            <Send className="size-5" />
           </Button>
         </div>
-        <p className="mt-2 text-xs text-muted-foreground">
+        <p className="mt-3 text-xs text-zinc-500">
           This is a demo interface. In production, {agent.name} would connect to
           real business systems.
         </p>

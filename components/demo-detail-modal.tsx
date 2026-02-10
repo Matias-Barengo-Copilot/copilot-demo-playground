@@ -1,15 +1,15 @@
 "use client";
 
-import Image from "next/image";
+import { useState } from "react";
 import { AppModal } from "@/components/app-modal";
 import { Button } from "@/components/ui/button";
-import type { DemoFromMock } from "@/lib/demos-mock";
-import { ExternalLink } from "lucide-react";
+import type { BusinessFunctionDemo } from "@/lib/demos-db";
+import { ExternalLink, Loader2 } from "lucide-react";
 
 type DemoDetailModalProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  demo: DemoFromMock | null;
+  demo: BusinessFunctionDemo | null;
 };
 
 /**
@@ -20,23 +20,36 @@ export function DemoDetailModal({
   onOpenChange,
   demo,
 }: DemoDetailModalProps) {
+  const [loadedImageIds, setLoadedImageIds] = useState<Set<string>>(() => new Set());
+
   if (!demo) return null;
 
   const { title, description, narrative, url, imageUrl, tags } = demo;
+  const imageLoaded = imageUrl ? loadedImageIds.has(demo.id) : true;
 
   const media = (
-    <div className="relative aspect-video w-full overflow-hidden">
+    <div className="relative aspect-video w-full overflow-hidden bg-zinc-800">
       {imageUrl ? (
-        <Image
-          src={imageUrl}
-          alt={title}
-          fill
-          className="object-cover"
-          sizes="(max-width: 640px) 100vw, 32rem"
-        />
+        <>
+          {!imageLoaded && (
+            <div
+              className="absolute inset-0 z-10 flex items-center justify-center text-zinc-400"
+              aria-hidden
+            >
+              <Loader2 className="size-10 animate-spin" aria-label="Loading image" />
+            </div>
+          )}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={imageUrl}
+            alt={title}
+            className="absolute inset-0 h-full w-full object-cover"
+            onLoad={() => setLoadedImageIds((prev) => new Set(prev).add(demo.id))}
+          />
+        </>
       ) : (
         <div
-          className="flex h-full w-full items-center justify-center text-muted-foreground/40"
+          className="flex h-full w-full items-center justify-center text-zinc-500"
           aria-hidden
         />
       )}
@@ -49,8 +62,12 @@ export function DemoDetailModal({
       onOpenChange={onOpenChange}
       title={title}
       media={media}
+      variant="dark"
       footer={
-        <Button asChild className="w-full gap-2 sm:w-auto">
+        <Button
+          asChild
+          className="w-full gap-2 border-white/20 bg-white/10 text-white hover:bg-white/20 sm:w-auto"
+        >
           <a
             href={url}
             target="_blank"
@@ -68,16 +85,16 @@ export function DemoDetailModal({
           {tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-md bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary"
+              className="rounded-md bg-white/10 px-2 py-0.5 text-xs font-medium text-zinc-300"
             >
               {tag}
             </span>
           ))}
         </div>
       )}
-      <p className="text-sm text-foreground">{description}</p>
+      <p className="text-sm text-zinc-200">{description}</p>
       {narrative && (
-        <p className="mt-3 text-sm text-muted-foreground">{narrative}</p>
+        <p className="mt-3 text-sm text-zinc-400">{narrative}</p>
       )}
     </AppModal>
   );
