@@ -100,6 +100,13 @@ export async function createBusinessFunctionDemo(
   const url = typeof urlRaw === "string" ? urlRaw.trim().slice(0, URL_MAX_LENGTH) || undefined : undefined;
   const imageUrl = typeof imageUrlRaw === "string" ? imageUrlRaw.trim().slice(0, URL_MAX_LENGTH) || undefined : undefined;
 
+  if (url && !url.startsWith("http://") && !url.startsWith("https://")) {
+    return { error: "External URL must use http:// or https://." };
+  }
+  if (imageUrl && !imageUrl.startsWith("http://") && !imageUrl.startsWith("https://") && !imageUrl.startsWith("/")) {
+    return { error: "Image URL must use http://, https://, or a path starting with /." };
+  }
+
   const metadata: BusinessFunctionDemoMetadata = {};
   if (url) metadata.url = url;
   if (imageUrl) metadata.imageUrl = imageUrl;
@@ -114,7 +121,7 @@ export async function createBusinessFunctionDemo(
       sortOrder: 0,
     });
     return { success: `Demo "${title}" was added to ${businessFunctionSlug}.` };
-  } catch (e) {
+  } catch {
     return { error: "Failed to create demo. Try again." };
   }
 }

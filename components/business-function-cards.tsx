@@ -55,10 +55,7 @@ export function BusinessFunctionCards({
                 }}
               >
                 {/* Front: image + overlay + icon + title */}
-                <div
-                  className="absolute inset-0 backface-hidden rounded-2xl overflow-hidden cursor-pointer"
-                  style={{ backfaceVisibility: "hidden" }}
-                >
+                <div className="absolute inset-0 backface-hidden rounded-2xl overflow-hidden cursor-pointer">
                   <Image
                     src={imageUrl}
                     alt={category.title}
@@ -76,13 +73,7 @@ export function BusinessFunctionCards({
                 </div>
 
                 {/* Back: title + demo buttons */}
-                <div
-                  className="absolute inset-0 backface-hidden rounded-2xl bg-linear-to-br from-zinc-800 to-zinc-900 p-8 flex flex-col justify-center"
-                  style={{
-                    backfaceVisibility: "hidden",
-                    transform: "rotateY(180deg)",
-                  }}
-                >
+                <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-2xl bg-linear-to-br from-zinc-800 to-zinc-900 p-8 flex flex-col justify-center">
                   <h3 className="text-2xl text-white mb-6">{category.title}</h3>
                   <div className="space-y-4">
                     {demos.length > 0 ? (

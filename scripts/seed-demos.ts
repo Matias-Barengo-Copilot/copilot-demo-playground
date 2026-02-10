@@ -3,7 +3,7 @@
  *
  * Usage: npx tsx scripts/seed-demos.ts
  * Requires DATABASE_URL in .env.
- * Run once; running again will insert duplicate rows.
+ * Idempotent: re-running skips rows that already exist (unique on category_slug + title).
  */
 import "dotenv/config";
 import { db } from "../lib/db";
@@ -56,8 +56,13 @@ const SEED_DEMOS = [
 ];
 
 async function main() {
-  await db.insert(businessFunctionDemos).values(SEED_DEMOS);
-  console.log("Seed demos: inserted", SEED_DEMOS.length);
+  await db
+    .insert(businessFunctionDemos)
+    .values(SEED_DEMOS)
+    .onConflictDoNothing({
+      target: [businessFunctionDemos.categorySlug, businessFunctionDemos.title],
+    });
+  console.log(`Seed demos: ${SEED_DEMOS.length} processed (inserted or skipped on conflict).`);
 }
 
 main().catch((e) => {

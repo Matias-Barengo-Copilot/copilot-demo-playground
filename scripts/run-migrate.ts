@@ -49,7 +49,8 @@ async function main() {
       "metadata" jsonb,
       "sort_order" smallint DEFAULT 0 NOT NULL,
       "created_at" timestamp with time zone DEFAULT now() NOT NULL,
-      "updated_at" timestamp with time zone DEFAULT now() NOT NULL
+      "updated_at" timestamp with time zone DEFAULT now() NOT NULL,
+      CONSTRAINT "business_function_demos_category_slug_title_unique" UNIQUE ("category_slug", "title")
     )
   `;
   await sql`
@@ -74,6 +75,13 @@ async function main() {
       "created_at" timestamp with time zone DEFAULT now() NOT NULL,
       "updated_at" timestamp with time zone DEFAULT now() NOT NULL
     )
+  `;
+  await sql`
+    DO $$ BEGIN
+      ALTER TABLE "business_function_demos"
+      ADD CONSTRAINT "business_function_demos_category_slug_title_unique"
+      UNIQUE ("category_slug", "title");
+    EXCEPTION WHEN duplicate_object THEN NULL; END $$
   `;
   console.log("Migration completed.");
 }

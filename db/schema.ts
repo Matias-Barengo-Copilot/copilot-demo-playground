@@ -5,6 +5,7 @@ import {
   smallint,
   text,
   timestamp,
+  unique,
   uuid,
 } from "drizzle-orm/pg-core";
 
@@ -50,17 +51,23 @@ export type BusinessFunctionDemoMetadata = {
   imageUrl?: string;
 };
 
-export const businessFunctionDemos = pgTable("business_function_demos", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  categorySlug: businessFunctionSlugEnum("category_slug").notNull(),
-  title: text("title").notNull(),
-  description: text("description").notNull(),
-  narrative: text("narrative").notNull(),
-  metadata: jsonb("metadata").$type<BusinessFunctionDemoMetadata>(),
-  sortOrder: smallint("sort_order").notNull().default(0),
-  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
-});
+export const businessFunctionDemos = pgTable(
+  "business_function_demos",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    categorySlug: businessFunctionSlugEnum("category_slug").notNull(),
+    title: text("title").notNull(),
+    description: text("description").notNull(),
+    narrative: text("narrative").notNull(),
+    metadata: jsonb("metadata").$type<BusinessFunctionDemoMetadata>(),
+    sortOrder: smallint("sort_order").notNull().default(0),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [
+    unique("business_function_demos_category_slug_title_unique").on(table.categorySlug, table.title),
+  ]
+);
 
 export type BusinessFunctionDemoRow = typeof businessFunctionDemos.$inferSelect;
 export type NewBusinessFunctionDemo = typeof businessFunctionDemos.$inferInsert;

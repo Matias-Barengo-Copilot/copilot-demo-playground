@@ -30,7 +30,8 @@ CREATE TABLE IF NOT EXISTS "business_function_demos" (
   "metadata" jsonb,
   "sort_order" smallint DEFAULT 0 NOT NULL,
   "created_at" timestamp with time zone DEFAULT now() NOT NULL,
-  "updated_at" timestamp with time zone DEFAULT now() NOT NULL
+  "updated_at" timestamp with time zone DEFAULT now() NOT NULL,
+  CONSTRAINT "business_function_demos_category_slug_title_unique" UNIQUE ("category_slug", "title")
 );
 
 DO $$ BEGIN

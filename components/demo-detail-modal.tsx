@@ -25,6 +25,8 @@ export function DemoDetailModal({
   if (!demo) return null;
 
   const { title, description, narrative, url, imageUrl, tags } = demo;
+  const safeExternalUrl =
+    url && (url.startsWith("http://") || url.startsWith("https://")) ? url : null;
   const imageLoaded = imageUrl ? loadedImageIds.has(demo.id) : true;
 
   const media = (
@@ -64,20 +66,22 @@ export function DemoDetailModal({
       media={media}
       variant="dark"
       footer={
-        <Button
-          asChild
-          className="w-full gap-2 border-white/20 bg-white/10 text-white hover:bg-white/20 sm:w-auto"
-        >
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => onOpenChange(false)}
+        safeExternalUrl ? (
+          <Button
+            asChild
+            className="w-full gap-2 border-white/20 bg-white/10 text-white hover:bg-white/20 sm:w-auto"
           >
-            <ExternalLink className="size-4" />
-            Open in new tab
-          </a>
-        </Button>
+            <a
+              href={safeExternalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => onOpenChange(false)}
+            >
+              <ExternalLink className="size-4" />
+              Open in new tab
+            </a>
+          </Button>
+        ) : null
       }
     >
       {tags && tags.length > 0 && (
