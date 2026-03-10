@@ -39,36 +39,33 @@ export function getHotspotPitchYaw(h: PanoramaHotspot): {
 export const hrHotspots: PanoramaHotspot[] = [
   {
     id: "resume-ai",
-    title: "Resume AI",
-    description: "Resume AI",
+    title: "AI Resume Screening",
+    description: "Automatically analyze and rank resumes using AI to identify the best candidates faster. The system extracts key skills, qualifications, and experience from large applicant pools, helping you focus on the most relevant candidates while reducing manual review time.",
     x: 0.05,
     y: 0.65,
-    media: "https://www.youtube.com/watch?v=ysz5S6PUM-U",
+    media: "/media/acme-corp-hr-portal.mp4",
     link: "https://interview-service-blond.vercel.app/login",
   },
   {
     id: "interview-ai",
-    title: "Interview AI",
-    description: "Interview AI",
+    title: "AI Interview Intelligence",
+    description: "Conduct AI-assisted video interviews that evaluate candidate responses, communication patterns, and key competencies. Recruiters receive structured insights and candidate summaries to support faster and more informed hiring decisions.",
     x: 0.24,
     y: 0.6,
-    media: "/media/acme-corp-hr-portal-mov",
   },
   {
     id: "analytics-ai",
-    title: "Analytics AI",
-    description: "Analytics AI",
+    title: "Workforce Analytics",
+    description: "Gain actionable insights into hiring trends, employee performance, and workforce planning. AI-powered analytics help HR leaders track key metrics, identify talent gaps, and make data-driven decisions for workforce growth.",
     x: 0.505,
     y: 0.59,
-    media: "https://www.youtube.com/watch?v=ysz5S6PUM-U",
   },
   {
     id: "helpdesk-ai",
-    title: "Helpdesk AI",
-    description: "Helpdesk AI",
+    title: "HR Helpdesk AI",
+    description: "Provide employees with instant support through an AI-powered HR assistant. Employees can ask questions about policies, benefits, or documents and receive quick answers, reducing HR workload while improving employee experience.",
     x: 0.75,
     y: 0.58,
-    media: "https://www.youtube.com/watch?v=jNQXAC9IVRw",
   },
   {
     id: "onboarding-ai",
@@ -76,7 +73,6 @@ export const hrHotspots: PanoramaHotspot[] = [
     description: "Onboarding AI",
     x: 0.87,
     y: 0.63,
-    media: "https://www.youtube.com/watch?v=ysz5S6PUM-U",
   },
 ];
 

@@ -1,15 +1,15 @@
-diff --git a/node_modules/react-pannellum-next/dist/index.js b/node_modules/react-pannellum-next/dist/index.js
-index aa8a653..7718467 100644
---- a/node_modules/react-pannellum-next/dist/index.js
-+++ b/node_modules/react-pannellum-next/dist/index.js
-@@ -4561,23 +4561,30 @@ const $332b06753a23f2ac$var$defaultConfig = {
+diff --git a/node_modules/react-pannellum-next/dist/module.js b/node_modules/react-pannellum-next/dist/module.js
+index aefcbd0..8da525d 100644
+--- a/node_modules/react-pannellum-next/dist/module.js
++++ b/node_modules/react-pannellum-next/dist/module.js
+@@ -4553,23 +4553,28 @@ const $c6d9b8a7cedd8df3$var$defaultConfig = {
      ],
      hotSpots: []
  };
--const $332b06753a23f2ac$var$PanoramaViewer = ({ imagePath: imagePath, hotSpots: hotSpots, autoLoad: autoLoad, autoRotate: autoRotate, compass: compass, showControls: showControls, width: width, height: height, hotSpotDebug: hotSpotDebug })=>{
-+const $332b06753a23f2ac$var$PanoramaViewer = ({ imagePath: imagePath, hotSpots: hotSpots, autoLoad: autoLoad, autoRotate: autoRotate, compass: compass, showControls: showControls, width: width, height: height, hotSpotDebug: hotSpotDebug, initialHfov: initialHfov, onViewerReady: onViewerReady })=>{
-     const viewerRef = (0, $b4te3$react.useRef)(null);
-     (0, $b4te3$react.useEffect)(()=>{
+-const $c6d9b8a7cedd8df3$var$PanoramaViewer = ({ imagePath: imagePath, hotSpots: hotSpots, autoLoad: autoLoad, autoRotate: autoRotate, compass: compass, showControls: showControls, width: width, height: height, hotSpotDebug: hotSpotDebug })=>{
++const $c6d9b8a7cedd8df3$var$PanoramaViewer = ({ imagePath: imagePath, hotSpots: hotSpots, autoLoad: autoLoad, autoRotate: autoRotate, compass: compass, showControls: showControls, width: width, height: height, hotSpotDebug: hotSpotDebug, initialHfov: initialHfov, onViewerReady: onViewerReady })=>{
+     const viewerRef = (0, $6PEjo$useRef)(null);
+     (0, $6PEjo$useEffect)(()=>{
          let viewer = null;
          // Initialize the Pannellum viewer
 -        if (viewerRef.current) viewer = pannellum.viewer(viewerRef.current, {
@@ -21,11 +21,8 @@ index aa8a653..7718467 100644
 -            compass: !!compass,
 -            showControls: !!showControls,
 -            hotSpots: hotSpots && hotSpots.map((hotSpot)=>Object.assign(Object.assign({}, hotSpot), {
--                    clickHandlerFunc: hotSpot.onClick
--                }))
--        });
 +        if (viewerRef.current) {
-+            viewer = pannellum.viewer(viewerRef.current, {
++            var config = {
 +                type: "equirectangular",
 +                panorama: imagePath,
 +                autoLoad: !!autoLoad,
@@ -33,15 +30,14 @@ index aa8a653..7718467 100644
 +                hotSpotDebug: !!hotSpotDebug,
 +                compass: !!compass,
 +                showControls: !!showControls,
-+                hfov: initialHfov != null ? initialHfov : 100,
 +                hotSpots: hotSpots && hotSpots.map((hotSpot)=>Object.assign(Object.assign({}, hotSpot), {
-+                        clickHandlerFunc: hotSpot.onClick
-+                    }))
-+            });
-+            if (typeof onViewerReady === "function") {
-+                var v = viewer;
-+                setTimeout(function() { onViewerReady(v); }, 0);
-+            }
+                     clickHandlerFunc: hotSpot.onClick
+                 }))
+-        });
++            };
++            if (initialHfov != null) config.hfov = initialHfov;
++            viewer = pannellum.viewer(viewerRef.current, config);
++            if (typeof onViewerReady === 'function') onViewerReady(viewer);
 +        }
          // Clean up the viewer on component unmount
          return ()=>{

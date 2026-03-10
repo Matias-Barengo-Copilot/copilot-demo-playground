@@ -91,7 +91,7 @@ export default function DemoPanel({
           {activeHotspot.media && (
             <div className="relative aspect-video overflow-hidden rounded-2xl border border-white/10 bg-black">
               <video controls width="600">
-                <source src="/media/acme-corp-hr-portal.mp4" type="video/mp4" />
+                <source src={activeHotspot.media} type="video/mp4" />
               </video>
             </div>
           )}

@@ -13,7 +13,7 @@ export function PanoramaExperiencesSection({
     <section className="min-h-screen w-full bg-linear-to-b from-zinc-900 to-black py-24 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl text-white mb-6">
+          <h2 id="360-images" className="text-5xl md:text-6xl text-white mb-6">
             Experience in 360°
           </h2>
           <p className="text-xl text-zinc-400 max-w-2xl mx-auto">

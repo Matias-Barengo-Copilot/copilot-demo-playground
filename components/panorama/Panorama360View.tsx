@@ -65,7 +65,7 @@ export default function Panorama360View({
     [hotspots]
   );
 
-  const prevActiveIdRef = useRef<string | null>(null);
+  /** When activeHotspotId changes (panel arrows or manual hotspot click), animate camera to that hotspot. */
   useEffect(() => {
     if (!activeHotspotId || !hotspots.length) return;
     const spot = hotspots.find((h) => h.id === activeHotspotId);
@@ -73,11 +73,8 @@ export default function Panorama360View({
     const { pitch, yaw } = getHotspotPitchYaw(spot);
 
     if (viewerRef.current) {
-      if (prevActiveIdRef.current === activeHotspotId) return;
-      prevActiveIdRef.current = activeHotspotId;
       viewerRef.current.lookAt(pitch, yaw, undefined, LOOKAT_DURATION_MS);
     } else {
-      prevActiveIdRef.current = activeHotspotId;
       pendingLookAtRef.current = { pitch, yaw };
     }
   }, [activeHotspotId, hotspots]);

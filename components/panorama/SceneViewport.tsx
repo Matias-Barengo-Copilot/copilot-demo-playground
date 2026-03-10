@@ -7,6 +7,8 @@ import DemoPanel from "./DemoPanel";
 import IntroModal from "./IntroModal";
 import type { PanoramaHotspot } from "@/lib/panorama-hotspots";
 import { useSceneStore } from "@/store/useSceneStore";
+import { useRouter } from "next/navigation";
+import { ChevronLeftIcon } from "lucide-react";
 
 type SceneViewportProps = {
   debug?: boolean;
@@ -70,6 +72,8 @@ export default function SceneViewport({
     });
   };
 
+  const router = useRouter();
+
   return (
     <div
       ref={viewportRef}
@@ -85,6 +89,14 @@ export default function SceneViewport({
             "radial-gradient(circle at center, rgba(255,255,255,0) 0%, rgba(0,0,0,0.2) 70%, rgba(0,0,0,0.5) 100%)",
         }}
       />
+      <button
+        type="button"
+        onClick={() => router.push("/#360-images")}
+        className="flex items-center gap-2 absolute top-6 left-6 z-20 rounded-full border border-white/20 bg-black/80 px-4 py-2 text-xs uppercase tracking-wider text-white/80"
+      >
+        <ChevronLeftIcon className="size-4" />
+        Back
+      </button>
       <IntroModal title={introTitle} description={introDescription} />
       <DemoPanel hotspots={hotspots} onNavigate={handleNavigate} />
 
