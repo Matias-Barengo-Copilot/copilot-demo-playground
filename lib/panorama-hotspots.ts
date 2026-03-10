@@ -52,7 +52,7 @@ export const hrHotspots: PanoramaHotspot[] = [
     description: "Interview AI",
     x: 0.24,
     y: 0.6,
-    media: "https://www.youtube.com/watch?v=jNQXAC9IVRw",
+    media: "/media/acme-corp-hr-portal-mov",
   },
   {
     id: "analytics-ai",
