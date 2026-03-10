@@ -76,6 +76,13 @@ export default function DemoPanel({
           <p className="text-sm leading-6 text-zinc-300">
             {activeHotspot.description}
           </p>
+          <span>
+              {activeHotspot.link && (
+                <a className="text-blue-500 hover:underline" href={activeHotspot.link} target="_blank" rel="noopener noreferrer">
+                  Open in new tab
+                </a>
+              )}
+            </span>
 
           {activeHotspot.media && (
             <div className="relative aspect-video overflow-hidden rounded-2xl border border-white/10 bg-black">

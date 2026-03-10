@@ -21,6 +21,7 @@ export type PanoramaHotspot = {
   pitch?: number;
   yaw?: number;
   media?: string;
+  link?: string;
 };
 
 /** Get pitch/yaw in degrees for a hotspot (uses explicit values or derives from x,y). */
@@ -43,6 +44,7 @@ export const hrHotspots: PanoramaHotspot[] = [
     x: 0.05,
     y: 0.65,
     media: "https://www.youtube.com/watch?v=ysz5S6PUM-U",
+    link: "https://interview-service-blond.vercel.app/login",
   },
   {
     id: "interview-ai",
