@@ -82,7 +82,57 @@ export const hrHotspots: PanoramaHotspot[] = [
 export const classroomHotspots: PanoramaHotspot[] = [];
 
 /** Construction 360° scene (placeholder until scene-specific image/hotspots exist). */
-export const constructionHotspots: PanoramaHotspot[] = [];
+export const constructionHotspots: PanoramaHotspot[] = [
+  {
+    id: "drone-monitoring",
+    title: "Drone Monitoring",
+    description: "AI drone monitoring for construction progress and safety.",
+    x: 0.155,
+    y: 0.30,
+  },
+  {
+    id: "safety-camera",
+    title: "Safety Camera",
+    description: "Computer vision safety monitoring for workers and hazards.",
+    x: 0.083,
+    y: 0.455
+  },
+  {
+    id: "blueprint-tablet",
+    title: "Blueprint Tablet",
+    description: "Interactive blueprint analysis and AI planning tools.",
+    x: 0.50,
+    y: 0.60,
+  },
+  {
+    id: "estimate-ai",
+    title: "Estimate AI",
+    description: "AI-powered construction cost estimation and planning.",
+    x: 0.65,
+    y: 0.58,
+  },
+  {
+    id: "equipment-optimization",
+    title: "Equipment Optimization",
+    description: "Optimize machinery and equipment usage with AI.",
+    x: 0.83,
+    y: 0.53,
+  },
+  {
+    id: "material-tracking",
+    title: "Material Tracking",
+    description: "Track construction materials and deliveries automatically.",
+    x: 0.95,
+    y: 0.60,
+  },
+  {
+    id: "project-dashboard",
+    title: "Project Dashboard",
+    description: "Centralized AI dashboard for project monitoring.",
+    x: 0.93,
+    y: 0.48,
+  },
+];
 
 export function getHotspotsForSlug(
   slug: string

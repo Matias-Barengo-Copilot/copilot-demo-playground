@@ -45,9 +45,8 @@ const EXPERIENCES: PanoramaExperience[] = [
     title: "Construction Site",
     description:
       "Discover AI on site: safety monitoring, progress tracking, and resource optimization.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=900&q=80",
-    imagePath: "/images/office-panorama.png",
+    imageUrl: "/images/construction-panorama.png",
+    imagePath: "/images/construction-panorama.png",
     active: true,
   },
 ];
