@@ -3,10 +3,8 @@
 import { useRef, useState, useEffect } from "react";
 import type { PointerEvent } from "react";
 import Panorama360View from "./Panorama360View";
-import type { PanoramaViewerControlRef } from "./Panorama360View";
 import DemoPanel from "./DemoPanel";
 import IntroModal from "./IntroModal";
-import { getHotspotPitchYaw } from "@/lib/panorama-hotspots";
 import type { PanoramaHotspot } from "@/lib/panorama-hotspots";
 import { useSceneStore } from "@/store/useSceneStore";
 
@@ -26,7 +24,6 @@ export default function SceneViewport({
   introDescription,
 }: SceneViewportProps) {
   const viewportRef = useRef<HTMLDivElement | null>(null);
-  const viewerControlRef = useRef<PanoramaViewerControlRef | null>(null);
   const [cursorInfo, setCursorInfo] = useState({ x: 0, y: 0 });
 
   const activeHotspotId = useSceneStore((state) => state.activeHotspotId);
@@ -43,7 +40,7 @@ export default function SceneViewport({
     if (hotspots.length === 0) closePanel();
   }, [hotspots.length, closePanel]);
 
-  /** Navigate to previous/next hotspot; move camera immediately via viewer ref. */
+  /** Navigate to previous/next hotspot; camera is moved by Panorama360View via lookAt. */
   const handleNavigate = (direction: "prev" | "next") => {
     if (!hotspots.length) return;
     const length = hotspots.length;
@@ -60,8 +57,6 @@ export default function SceneViewport({
           ? (currentIndex + 1) % length
           : (currentIndex - 1 + length) % length;
     const nextSpot = hotspots[nextIndex];
-    const { pitch, yaw } = getHotspotPitchYaw(nextSpot);
-    viewerControlRef.current?.moveTo(pitch, yaw);
     setActiveHotspotWithIndex(nextSpot.id, nextIndex);
     openPanel();
   };
@@ -82,11 +77,7 @@ export default function SceneViewport({
       style={{ touchAction: "none" }}
       onPointerMove={handlePointerMove}
     >
-      <Panorama360View
-        imagePath={imagePath}
-        hotspots={hotspots}
-        viewerControlRef={viewerControlRef}
-      />
+      <Panorama360View imagePath={imagePath} hotspots={hotspots} />
       <div
         className="pointer-events-none absolute inset-0 z-10"
         style={{

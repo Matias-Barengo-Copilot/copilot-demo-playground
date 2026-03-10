@@ -14,76 +14,55 @@ const PanoramaViewer = dynamic(
 );
 
 const DEFAULT_PANORAMA_IMAGE = "/images/office-panorama.png";
+/** Duration in ms for smooth camera transition to a hotspot (viewer API). */
 const LOOKAT_DURATION_MS = 800;
 const INITIAL_HFOV = 85;
 
 /** Ordered list of target coordinates for each hotspot (pitch, yaw in degrees). */
 export type HotspotCoordinates = { pitch: number; yaw: number };
 
-/** Imperative handle: move camera to pitch/yaw. Set by Panorama360View when viewer is ready. */
-export type PanoramaViewerControlRef = {
-  moveTo: (pitch: number, yaw: number) => void;
-};
-
 type Panorama360ViewProps = {
   imagePath?: string;
   hotspots?: PanoramaHotspot[];
-  /** Optional ref so parent can call moveTo(pitch, yaw) when arrows are clicked. */
-  viewerControlRef?: React.MutableRefObject<PanoramaViewerControlRef | null>;
 };
 
 export default function Panorama360View({
   imagePath = DEFAULT_PANORAMA_IMAGE,
   hotspots = [],
-  viewerControlRef,
 }: Panorama360ViewProps) {
-  const viewerRef = useRef<{
-    lookAt?: (...args: unknown[]) => void;
-    setPitch?: (pitch: number, animated?: number | boolean) => void;
-    setYaw?: (yaw: number, animated?: number | boolean) => void;
-  } | null>(null);
+  const viewerRef = useRef<{ lookAt: (...args: unknown[]) => void } | null>(
+    null
+  );
   const setActiveHotspotWithIndex = useSceneStore(
     (state) => state.setActiveHotspotWithIndex
   );
   const openPanel = useSceneStore((state) => state.openPanel);
   const activeHotspotId = useSceneStore((state) => state.activeHotspotId);
 
+  /** Pending lookAt to run when viewer becomes ready (e.g. user clicked arrows before viewer loaded). */
   const pendingLookAtRef = useRef<{ pitch: number; yaw: number } | null>(null);
 
-  const moveTo = useCallback((pitch: number, yaw: number) => {
-    const v = viewerRef.current;
-    if (!v) {
-      pendingLookAtRef.current = { pitch, yaw };
-      return;
-    }
-    if (typeof v.lookAt === "function") {
-      v.lookAt(pitch, yaw, undefined, LOOKAT_DURATION_MS);
-      return;
-    }
-    if (typeof v.setPitch === "function" && typeof v.setYaw === "function") {
-      v.setPitch(pitch, LOOKAT_DURATION_MS);
-      v.setYaw(yaw, LOOKAT_DURATION_MS);
-      return;
-    }
-  }, []);
-
-  useEffect(() => {
-    if (viewerControlRef) viewerControlRef.current = { moveTo };
-    return () => {
-      if (viewerControlRef) viewerControlRef.current = null;
-    };
-  }, [viewerControlRef, moveTo]);
-
   const handleViewerReady = useCallback(
-    (viewer: { lookAt?: (...args: unknown[]) => void }) => {
+    (viewer: { lookAt: (...args: unknown[]) => void }) => {
       viewerRef.current = viewer;
       const pending = pendingLookAtRef.current;
       if (pending) {
         pendingLookAtRef.current = null;
-        moveTo(pending.pitch, pending.yaw);
+        viewer.lookAt(
+          pending.pitch,
+          pending.yaw,
+          undefined,
+          LOOKAT_DURATION_MS
+        );
       }
     },
-    [moveTo]
+    []
+  );
+
+  /** Ordered array of hotspot coordinates for navigation (same order as hotspots). */
+  const hotspotCoordinates = useMemo<HotspotCoordinates[]>(
+    () => hotspots.map((h) => getHotspotPitchYaw(h)),
+    [hotspots]
   );
 
   const prevActiveIdRef = useRef<string | null>(null);
@@ -92,10 +71,16 @@ export default function Panorama360View({
     const spot = hotspots.find((h) => h.id === activeHotspotId);
     if (!spot) return;
     const { pitch, yaw } = getHotspotPitchYaw(spot);
-    if (prevActiveIdRef.current === activeHotspotId) return;
-    prevActiveIdRef.current = activeHotspotId;
-    moveTo(pitch, yaw);
-  }, [activeHotspotId, hotspots, moveTo]);
+
+    if (viewerRef.current) {
+      if (prevActiveIdRef.current === activeHotspotId) return;
+      prevActiveIdRef.current = activeHotspotId;
+      viewerRef.current.lookAt(pitch, yaw, undefined, LOOKAT_DURATION_MS);
+    } else {
+      prevActiveIdRef.current = activeHotspotId;
+      pendingLookAtRef.current = { pitch, yaw };
+    }
+  }, [activeHotspotId, hotspots]);
 
   const handleHotspotClick = useCallback(
     (_e: unknown, args: unknown) => {
