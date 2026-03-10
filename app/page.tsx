@@ -8,8 +8,8 @@ import {
   getDemoCountsForAllCategories,
   getDemosForAllCategories,
 } from "@/lib/demos-db";
-import { getCafeCustomers } from "@/lib/cafe-customers";
-import { CafeCustomersSection } from "@/components/cafe-customers-section";
+import { getPanoramaExperiences } from "@/lib/panorama-experiences";
+import { PanoramaExperiencesSection } from "@/components/panorama-experiences-section";
 
 export default async function HomePage() {
   const session = await auth();
@@ -19,7 +19,7 @@ export default async function HomePage() {
     getDemoCountsForAllCategories(),
     getDemosForAllCategories(),
   ]);
-  const cafeCustomers = getCafeCustomers();
+  const panoramaExperiences = getPanoramaExperiences();
   const categoriesWithCount = LANDING_CATEGORIES.map((cat) => ({
     ...cat,
     demoCount: counts[cat.id] ?? 0,
@@ -73,8 +73,8 @@ export default async function HomePage() {
         {/* Digital Workforce — AI agents by area */}
         <DigitalWorkforceSection darkBackground />
 
-        {/* Customers in the Café — hover personas on café image */}
-        <CafeCustomersSection customers={cafeCustomers} />
+        {/* 360° experience cards — replace former "Customers in the Café" */}
+        <PanoramaExperiencesSection experiences={panoramaExperiences} />
       </main>
     </div>
   );
