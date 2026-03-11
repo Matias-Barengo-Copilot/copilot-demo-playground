@@ -43,22 +43,21 @@ export const hrHotspots: PanoramaHotspot[] = [
     description: "Automatically analyze and rank resumes using AI to identify the best candidates faster. The system extracts key skills, qualifications, and experience from large applicant pools, helping you focus on the most relevant candidates while reducing manual review time.",
     x: 0.05,
     y: 0.65,
-    media: "/media/acme-corp-hr-portal.mp4",
     link: "https://interview-service-blond.vercel.app/login",
   },
   {
     id: "interview-ai",
     title: "AI Interview Intelligence",
     description: "Conduct AI-assisted video interviews that evaluate candidate responses, communication patterns, and key competencies. Recruiters receive structured insights and candidate summaries to support faster and more informed hiring decisions.",
-    x: 0.24,
-    y: 0.6,
+    x: 0.273,
+    y: 0.52,
   },
   {
     id: "analytics-ai",
     title: "Workforce Analytics",
     description: "Gain actionable insights into hiring trends, employee performance, and workforce planning. AI-powered analytics help HR leaders track key metrics, identify talent gaps, and make data-driven decisions for workforce growth.",
-    x: 0.505,
-    y: 0.59,
+    x: 0.5015,
+    y: 0.53,
   },
   {
     id: "helpdesk-ai",
@@ -66,6 +65,7 @@ export const hrHotspots: PanoramaHotspot[] = [
     description: "Provide employees with instant support through an AI-powered HR assistant. Employees can ask questions about policies, benefits, or documents and receive quick answers, reducing HR workload while improving employee experience.",
     x: 0.75,
     y: 0.58,
+    media: "/media/acme-corp-hr-portal.mp4",
   },
   {
     id: "onboarding-ai",
@@ -81,55 +81,55 @@ export const classroomHotspots: PanoramaHotspot[] = [];
 
 /** Construction 360° scene (placeholder until scene-specific image/hotspots exist). */
 export const constructionHotspots: PanoramaHotspot[] = [
-  {
-    id: "drone-monitoring",
-    title: "Drone Monitoring",
-    description: "AI drone monitoring for construction progress and safety.",
-    x: 0.155,
-    y: 0.30,
-  },
-  {
-    id: "safety-camera",
-    title: "Safety Camera",
-    description: "Computer vision safety monitoring for workers and hazards.",
-    x: 0.083,
-    y: 0.455
-  },
-  {
-    id: "blueprint-tablet",
-    title: "Blueprint Tablet",
-    description: "Interactive blueprint analysis and AI planning tools.",
-    x: 0.50,
-    y: 0.60,
-  },
+  // {
+  //   id: "drone-monitoring",
+  //   title: "Drone Monitoring",
+  //   description: "AI drone monitoring for construction progress and safety.",
+  //   x: 0.155,
+  //   y: 0.30,
+  // },
+  // {
+  //   id: "safety-camera",
+  //   title: "Safety Camera",
+  //   description: "Computer vision safety monitoring for workers and hazards.",
+  //   x: 0.083,
+  //   y: 0.455
+  // },
+  // {
+  //   id: "blueprint-tablet",
+  //   title: "Blueprint Tablet",
+  //   description: "Interactive blueprint analysis and AI planning tools.",
+  //   x: 0.50,
+  //   y: 0.60,
+  // },
   {
     id: "estimate-ai",
     title: "Estimate AI",
     description: "AI-powered construction cost estimation and planning.",
     x: 0.65,
-    y: 0.58,
+    y: 0.45,
   },
-  {
-    id: "equipment-optimization",
-    title: "Equipment Optimization",
-    description: "Optimize machinery and equipment usage with AI.",
-    x: 0.83,
-    y: 0.53,
-  },
-  {
-    id: "material-tracking",
-    title: "Material Tracking",
-    description: "Track construction materials and deliveries automatically.",
-    x: 0.95,
-    y: 0.60,
-  },
-  {
-    id: "project-dashboard",
-    title: "Project Dashboard",
-    description: "Centralized AI dashboard for project monitoring.",
-    x: 0.93,
-    y: 0.48,
-  },
+  // {
+  //   id: "equipment-optimization",
+  //   title: "Equipment Optimization",
+  //   description: "Optimize machinery and equipment usage with AI.",
+  //   x: 0.83,
+  //   y: 0.53,
+  // },
+  // {
+  //   id: "material-tracking",
+  //   title: "Material Tracking",
+  //   description: "Track construction materials and deliveries automatically.",
+  //   x: 0.95,
+  //   y: 0.60,
+  // },
+  // {
+  //   id: "project-dashboard",
+  //   title: "Project Dashboard",
+  //   description: "Centralized AI dashboard for project monitoring.",
+  //   x: 0.93,
+  //   y: 0.48,
+  // },
 ];
 
 export function getHotspotsForSlug(
