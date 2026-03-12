@@ -299,15 +299,24 @@ body {
   position: absolute;
   inset: 0;
   border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  background: rgba(255, 255, 255, 0.1);
-  transition: border-color 0.15s, background-color 0.15s;
-  animation: panorama-hotspot-pulse 2s ease-in-out infinite;
+  border: 3px solid rgb(255, 255, 255);
+  background: rgb(255, 255, 255);
+  animation: panorama-hotspot-pulse 2s infinite;
 }
 
 @keyframes panorama-hotspot-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
 }
 
 .pnlm-hotspot-base.panorama-hotspot:hover::before {
