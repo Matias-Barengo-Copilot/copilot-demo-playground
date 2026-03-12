@@ -318,11 +318,11 @@ body {
 .pnlm-hotspot-base.panorama-hotspot::after {
   content: "";
   position: absolute;
-  width: 10px;
-  height: 10px;
+  width: 20px;
+  height: 20px;
   border-radius: 9999px;
   background: white;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.99);
   z-index: 1;
 }
 

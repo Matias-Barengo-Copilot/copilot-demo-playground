@@ -22,7 +22,7 @@ export function PanoramaExperiencesSection({
           </p>
         </div>
 
-        <section className="grid w-full gap-10 md:grid-cols-3">
+        <section className="flex w-full flex-wrap justify-center gap-10">
           {experiences.map((exp) => {
             const cardBody = (
               <>
@@ -53,14 +53,14 @@ export function PanoramaExperiencesSection({
               <Link
                 key={exp.id}
                 href={`/demos/360/${exp.slug}`}
-                className="group flex flex-col items-center gap-4 rounded-2xl p-4 transition hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-zinc-900"
+                className="group flex basis-[320px] max-w-[320px] flex-col items-center gap-4 rounded-2xl p-4 transition hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-zinc-900"
               >
                 {cardBody}
               </Link>
             ) : (
               <div
                 key={exp.id}
-                className="flex flex-col items-center gap-4 rounded-2xl p-4 opacity-75"
+                className="flex basis-[320px] max-w-[320px] flex-col items-center gap-4 rounded-2xl p-4 opacity-75"
               >
                 {cardBody}
               </div>

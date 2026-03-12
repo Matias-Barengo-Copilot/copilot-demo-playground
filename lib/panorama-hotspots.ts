@@ -66,6 +66,7 @@ export const hrHotspots: PanoramaHotspot[] = [
     x: 0.75,
     y: 0.58,
     media: "/media/acme-corp-hr-portal.mp4",
+    link: "https://hr-ai-assistant.copilotinnovations.com/",
   },
   {
     id: "onboarding-ai",
@@ -77,7 +78,43 @@ export const hrHotspots: PanoramaHotspot[] = [
 ];
 
 /** Classroom 360° scene (placeholder until scene-specific image/hotspots exist). */
-export const classroomHotspots: PanoramaHotspot[] = [];
+export const classroomHotspots: PanoramaHotspot[] = [
+  {
+    id: "visual-aid",
+    title: "Teacher creating visual aid",
+    description: "Teacher creating visual aid",
+    x: 0.1,
+    y: 0.6,
+  },
+  {
+    id: "ilustrations-generator",
+    title: "AI Illustration Generation",
+    description: "AI Illustration Generation",
+    x: 0.33,
+    y: 0.35,
+  },
+  {
+    id: "visual-materials",
+    title: "Students using visual materials",
+    description: "Students using visual materials",
+    x: 0.5,
+    y: 0.55,
+  },
+  {
+    id: "smartboard",
+    title: "Interactive Smartboard lesson",
+    description: "Interactive Smartboard lesson",
+    x: 0.68,
+    y: 0.35,
+  },
+  {
+    id: "curriculum",
+    title: "Curriculum planning desk",
+    description: "Curriculum planning desk",
+    x: 0.885,
+    y: 0.625,
+  },
+];
 
 /** Construction 360° scene (placeholder until scene-specific image/hotspots exist). */
 export const constructionHotspots: PanoramaHotspot[] = [
@@ -132,6 +169,45 @@ export const constructionHotspots: PanoramaHotspot[] = [
   // },
 ];
 
+/** Classroom 360° scene (placeholder until scene-specific image/hotspots exist). */
+export const ecommerceHotspots: PanoramaHotspot[] = [
+  {
+    id: "store-window-marketing-display",
+    title: "AI SEO + Lifestyle Images for Apparel",
+    description: "Store window marketing display",
+    x: 0.1,
+    y: 0.4,
+  },
+  {
+    id: "sales-associate-ai-assistant",
+    title: "AI Sales Assistant In-Store (200k SKUs)",
+    description: "Sales associated AI assistant",
+    x: 0.21,
+    y: 0.58,
+  },
+  {
+    id: "customer-mobile-shopping-companion",
+    title: "Mobile App In-Store companion",
+    description: "Customer mobile shopping companion",
+    x: 0.55,
+    y: 0.58,
+  },
+  {
+    id: "ai-chatbot-product-recommendations",
+    title: "Chatbot + Product Recommendations",
+    description: "AI Chatbot / Product recommendations",
+    x: 0.68,
+    y: 0.58,
+  },
+  {
+    id: "checkout-verification-system",
+    title: "Order Verification + Checkout AI",
+    description: "Checkout verification system",
+    x: 0.9,
+    y: 0.58,
+  },
+];
+
 export function getHotspotsForSlug(
   slug: string
 ): PanoramaHotspot[] {
@@ -142,6 +218,8 @@ export function getHotspotsForSlug(
       return classroomHotspots;
     case "construction":
       return constructionHotspots;
+    case "ecommerce":
+      return ecommerceHotspots;
     default:
       return [];
   }

@@ -3,7 +3,7 @@
  * Aligned with main app patterns (lib-based config; can be moved to DB later).
  */
 
-export type PanoramaExperienceSlug = "hr" | "classroom" | "construction";
+export type PanoramaExperienceSlug = "hr" | "classroom" | "construction" | "ecommerce";
 
 export type PanoramaExperience = {
   id: string;
@@ -34,9 +34,8 @@ const EXPERIENCES: PanoramaExperience[] = [
     title: "Classroom",
     description:
       "Explore AI in education: smart classrooms, personalized learning, and real-time engagement.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80",
-    imagePath: "/images/office-panorama.png",
+    imageUrl: "/images/classroom-panorama.png",
+    imagePath: "/images/classroom-panorama.png",
     active: true,
   },
   {
@@ -49,6 +48,16 @@ const EXPERIENCES: PanoramaExperience[] = [
     imagePath: "/images/construction-panorama.png",
     active: true,
   },
+  {
+    id: "ecommerce",
+    slug: "ecommerce",
+    title: "Ecommerce",
+    description:
+      "Explore AI in ecommerce: personalized recommendations, inventory management, and customer service.",
+    imageUrl: "/images/ecommerce-panorama.png",
+    imagePath: "/images/ecommerce-panorama.png",
+    active: true,
+  },
 ];
 
 export function getPanoramaExperiences(): PanoramaExperience[] {
@@ -59,6 +68,6 @@ export function getPanoramaExperienceBySlug(
   slug: string
 ): PanoramaExperience | null {
   const s = slug as PanoramaExperienceSlug;
-  if (!["hr", "classroom", "construction"].includes(slug)) return null;
+  if (!["hr", "classroom", "construction", "ecommerce"].includes(slug)) return null;
   return EXPERIENCES.find((e) => e.slug === s) ?? null;
 }
