@@ -1,0 +1,59 @@
+1. Start with planning, not editing (optional)
+
+Even if they are executing, they should still begin by confirming:
+
+what the task is
+
+what is in scope
+
+what is out of scope
+
+what validation is required
+
+They should not just open Claude Code and immediately ask it to code.
+
+2. Claude is following context, not truth (optional)
+
+If the spec or plan is weak, Claude will confidently fill in gaps.
+So the executor should:
+
+notice ambiguity early
+
+not assume the model “probably got it right”
+
+correct direction before generating lots of code
+
+3. Fresh context matters
+
+They should keep the task session focused:
+
+avoid dragging unrelated task history into the session
+
+clear or restart when switching tasks
+
+avoid bloated prompts
+
+4. Validation is part of execution
+
+Their job is not done when code compiles.
+They must verify:
+
+acceptance criteria
+
+tests
+
+manual checks when needed
+
+any extra checks required by the change
+
+5. Deviation must be visible
+
+If actual implementation differs from the implementation plan:
+
+document it
+
+justify it
+
+explain the risk or benefit
+
+Do not “fix the docs in your head.”

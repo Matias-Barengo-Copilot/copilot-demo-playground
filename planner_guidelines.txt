@@ -1,0 +1,67 @@
+1. Claude performs best with clear, bounded instructions
+
+The better the task framing, the less likely Claude is to:
+
+overbuild
+
+refactor unrelated areas
+
+invent missing requirements
+
+optimize for the wrong thing
+
+2. More words do not mean better planning
+
+A bloated spec is often worse than a short sharp one.
+The planner should give:
+
+enough context to remove ambiguity
+
+enough constraints to prevent drift
+
+enough acceptance criteria to validate the result
+
+But not:
+
+giant essays
+
+every possible implementation detail
+
+repeated information
+
+3. Specs and plans serve different purposes
+
+A common failure mode is blending them together.
+
+Keep them separate:
+
+Spec = what and why
+
+Implementation plan = how
+
+CLAUDE.md = standing rules and workflow
+
+4. Validation is part of planning
+
+If the planner does not define how success will be checked, the executor will improvise.
+
+Every planned task should include:
+
+required automated validation
+
+required manual validation
+
+any special regression checks
+
+5. The plan must anticipate drift
+
+Reality will differ from the plan sometimes.
+So the planner should make it easy to spot:
+
+what is core
+
+what is optional
+
+what requires escalation
+
+That is what makes PR review meaningful later.
