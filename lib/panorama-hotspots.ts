@@ -177,11 +177,13 @@ export const ecommerceHotspots: PanoramaHotspot[] = [
     description: "Store window marketing display",
     x: 0.1,
     y: 0.4,
+    link: "http://ai-seo-agentic-framework.copilotinnovations.com"
   },
   {
     id: "sales-associate-ai-assistant",
     title: "AI Sales Assistant In-Store (200k SKUs)",
     description: "Sales associated AI assistant",
+    media: "/media/ai-sales-assistant.mp4",
     x: 0.21,
     y: 0.58,
   },
@@ -195,9 +197,10 @@ export const ecommerceHotspots: PanoramaHotspot[] = [
   {
     id: "ai-chatbot-product-recommendations",
     title: "Chatbot + Product Recommendations",
-    description: "AI Chatbot / Product recommendations",
+    description: "S&P Chatbot with order verification and product recommendations",
     x: 0.68,
     y: 0.58,
+    link: "https://www.silverandpewtergifts.com/"
   },
   {
     id: "checkout-verification-system",
