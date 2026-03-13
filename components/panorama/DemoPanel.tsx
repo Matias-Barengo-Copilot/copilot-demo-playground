@@ -90,9 +90,19 @@ export default function DemoPanel({
 
           {activeHotspot.media && (
             <div className="relative aspect-video overflow-hidden rounded-2xl border border-white/10 bg-black">
-              <video controls width="600">
-                <source src={activeHotspot.media} type="video/mp4" />
-              </video>
+              {isDirectVideo(activeHotspot.media) ? (
+                <video controls className="h-full w-full">
+                  <source src={activeHotspot.media} type="video/mp4" />
+                </video>
+              ) : (
+                <ReactPlayer
+                  src={activeHotspot.media}
+                  controls
+                  width="100%"
+                  height="100%"
+                  onError={(e) => console.warn("ReactPlayer error:", e)}
+                />
+              )}
             </div>
           )}
 

@@ -43,3 +43,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Claude runtime files
+.claude/cache
+.claude/tmp
+.claude/logs
+.claude/sessions
